@@ -5,12 +5,6 @@ const router = new Router()
 
 const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-router.get('/:id', async (req, res) => {
-    const { id } = req.params
-    const { rows } = await db.query('SELECT * FROM users WHERE id = $1', [id])
-    res.send(rows[0])
-})
-
 router.use('/', async (req, res) => {
     if (req.method !== 'POST')
         return res.status(405).send({ message: 'Only `Post` Method is Valid' })
