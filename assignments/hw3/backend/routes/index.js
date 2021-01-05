@@ -17,7 +17,7 @@ authenticate = (req, res, next) => {
             return res.status(403).send('JsonWebTokenError')
 
         req.user = user
-        next() // pass the execution off to whatever request the client intended
+        next()
     })
 }
 

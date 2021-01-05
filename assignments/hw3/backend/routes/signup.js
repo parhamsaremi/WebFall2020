@@ -20,11 +20,13 @@ router.use('/', async (req, res) => {
     if (password.length < 5)
         return res.status(400).send({ message: 'filed `password`.length should be gt 5' })
 
-    const { rows } = await db.query('SELECT * FROM users WHERE email = $1', [email])
+    const { rows } = await db.query('SELECT ID FROM users WHERE email = $1', [email])
     if (rows.length)
         return res.status(409).send({ message: 'email already exist.' })
 
-    await db.query('INSERT INTO users (email, created_at) VALUES ($1, current_date)', [email])
+    await db.query("INSERT INTO users (email, password, created_at) VALUES"
+        + "($1, crypt($2, gen_salt(\'bf\')), current_date)", [email, password])
+
     res.status(201).send({ message: 'user has been created.' })
 });
 
