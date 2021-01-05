@@ -1,8 +1,12 @@
-const express = require('express');
-const router = express.Router();
+const Router = require('express-promise-router')
+const db = require('../db')
 
-router.get('/', function (req, res, next) {
-    res.send('post works!');
+const router = new Router()
+
+router.get('/', async (req, res) => {
+    const {rows} = await db.query('SELECT * FROM posts')
+
+    res.status(200).send({posts: rows})
 });
 
-module.exports = router;
+module.exports = router
