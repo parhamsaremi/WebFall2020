@@ -14,7 +14,7 @@ authenticate = (req, res, next) => {
 
     jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
         if (err)
-            return res.status(403).send('JsonWebTokenError')
+            return res.status(401).send({message: 'invalid token'})
 
         req.user = user
         next()
