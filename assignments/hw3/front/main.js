@@ -1,16 +1,18 @@
 setup = function () {
-    // loadStartingAnimation()
-    // document
-        // .getElementById("homePage")
-        // .addEventListener("click", () => fillGrid());
-    // document
-        // .getElementById("dataPage")
-        // .addEventListener("click", () => loadTable());
-    // document
-        // .getElementById("customSwitches")
-        // .addEventListener("click", () => toggleDarkMode());
+    loadStartingAnimation()
+    document
+        .getElementById("homePage")
+        .addEventListener("click", () => fillGrid());
+    document
+        .getElementById("dataPage")
+        .addEventListener("click", () => loadTable());
+    document
+        .getElementById("postPage")
+        .addEventListener("click", () => fillPosts());
+    document
+        .getElementById("customSwitches")
+        .addEventListener("click", () => toggleDarkMode());
     document.documentElement.scrollTop = 0;
-    fillGrid();
 };
 
 function toggleDarkMode() {
@@ -47,32 +49,65 @@ toggleValue = (template, value1, value2) => {
 };
 
 fillGrid = function () {
-    // document.getElementById("homePage").style.borderBottom = "thick solid";
-    // document.getElementById("dataPage").style.borderBottom = "none";
+    document.getElementById("postPage").style.borderBottom = "none"
+    document.getElementById("homePage").style.borderBottom = "thick solid";
+    document.getElementById("dataPage").style.borderBottom = "none";
     navigationMenuToggle("homepage_s")
     //
     let template = "";
     for (let i = 0; i < 20; i++) {
-        template += `<div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+        template += `<span class="card" style="width: auto; min-width: 150px">
+    <img class="card-img-top" src="./assets/multi_logo_200x200.png" alt="Card image cap">
     <div class="card-body">
-      <h5 class="card-title">Dark card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <p class="card-text">کارت ${i + 1}</p>
     </div>
-    <div class="card-header">Header</div>
-    <div class="card-header">Header</div>
-  </div>`;
+  </span>`;
     }
     document.getElementById("dataTable").innerHTML = "";
     document.getElementById("smallDataTable").innerHTML = "";
     document.getElementById("dataGrid").innerHTML = template;
-    // document.getElementById("panelButtons").style.display = "flex";
+    document.getElementById("panelButtons").style.display = "flex";
 };
 
-loadTable = () => {
-    document.getElementById("dataPage").style.borderBottom = "thick solid";
+fillPosts = () => {
+    document.getElementById("postPage").style.borderBottom = "thick solid"
     document.getElementById("homePage").style.borderBottom = "none";
+    document.getElementById("dataPage").style.borderBottom = "none";
+    // todo is navigationMenuToggle() needed? "alireza tajmir"
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            posts = this.responseText.posts;
+            navigationMenuToggle("homepage_s")
+            let template = "";
+            for (let i = 0; i < posts.length; i++) {
+                let post = posts[i];
+                template += `<div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                    <div class="card-body">
+                    <h5 class="card-title">${post.title}</h5>
+                    <p class="card-text">${post.content}</p>
+                    </div>
+                    <div class="card-header">${post.created_by}</div>
+                    <div class="card-header">${post.created_at}</div>
+                    </div>`;
+            }
+            document.getElementById("dataTable").innerHTML = "";
+            document.getElementById("smallDataTable").innerHTML = "";
+            document.getElementById("dataGrid").innerHTML = template;
+        }
+    };
+    // todo check url
+    xhttp.open("GET", "http://localhost/api/post/", true);
+    xhttp.send();
+}
+
+loadTable = () => {
+    document.getElementById("postPage").style.borderBottom = "none"
+    document.getElementById("homePage").style.borderBottom = "none";
+    document.getElementById("dataPage").style.borderBottom = "thick solid";
     navigationMenuToggle("datapage_s")
-    //
+
     let data = getTableData();
     loadMainTable(data);
     loadSmallTable(data);
@@ -241,19 +276,19 @@ loadEndingAnimation = function (duration) {
 }
 
 goToRegister = function () {
-    // let duration = 1500
-    // loadEndingAnimation(duration)
-    // setTimeout(() => {
-    window.location.href = "./register.html"
-    // }, duration + 300);
+    let duration = 1500
+    loadEndingAnimation(duration)
+    setTimeout(() => {
+        window.location.href = "./register.html"
+    }, duration + 300);
 }
 
 goToLogin = function () {
-    // let duration = 1500
-    // loadEndingAnimation(duration)
-    // setTimeout(() => {
-    window.location.href = "./register.html"
-    // }, duration + 300)
+    let duration = 1500
+    loadEndingAnimation(duration)
+    setTimeout(() => {
+        window.location.href = "./register.html"
+    }, duration + 300)
 }
 
 homepage = function () {
