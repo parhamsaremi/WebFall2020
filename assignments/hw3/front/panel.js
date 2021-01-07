@@ -56,8 +56,16 @@ document.getElementById("dataGrid").innerHTML = addCard + infoCard
 
 function editPost(elem){
 
-  //get initial value
-
+  /**very important:  change this function if structure of cards is changed
+  !!
+  !!
+  !!
+  !!
+  !!
+  !!
+  !!
+  !!
+  **/
   initialHeader = elem.parentElement.parentElement.getElementsByTagName('h5')[0].innerHTML
   initialText = elem.parentElement.parentElement.getElementsByTagName('p')[0].innerHTML
   Swal.mixin({
