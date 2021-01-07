@@ -60,6 +60,7 @@ showAlert = function (str, type) {
 
 closeAlert = function () {
     var element = document.getElementById('alertBox1')
+    // todo below line seems to have a bug
     element.alert('close')
 }
 
@@ -84,7 +85,36 @@ checkFormRegister = function () {
     } else if (!agreeTerms) {
         showAlert('لطفا قوانین و شرایط را قبول کنید', 'danger');
     } else {
-        showAlert('ثبت‌نام موفقیت آمیز بود', 'success')
+        // showAlert('ثبت‌نام موفقیت آمیز بود', 'success')
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                const { message } = JSON.parse(xhttp.responseText);
+                if (message == 'Request Length should be 2') {
+                    showAlert('خطا در ارسال اطلاعات (طول درخواست ۲ نبود)', 'danger');
+                }
+                else if (message == 'email already exist') {
+                    showAlert('ایمیل وارد شده تا حالا استفاده شده است', 'danger');
+                }
+                else if (message == 'filled `email` is not valid') {
+                    showAlert('فرمت ایمیل ورودی صحیح نمی‌باشد', 'danger');
+                }
+                else if (message == 'filled `password` length should be gt 5') {
+                    showAlert('طول رمز وارد شده باید حداقل ۵ کاراکتر باشد', 'danger');
+                }
+                else if (message == 'user has been created') {
+                    showAlert('حساب کاربری با موفقیت ساخته شد', 'success');
+                    window.localStorage.setItem('token',token);
+                }
+            }
+        };
+        // todo check url
+        xhttp.open("POST", "http://localhost/api/signup", true);
+        let body = {
+            email: email,
+            password: password
+        }
+        xhttp.send(body);
     }
 }
 
@@ -100,13 +130,38 @@ checkFormLogin = function () {
         showAlert('فرمت ایمیل ورودی صحیح نمی‌باشد', 'danger');
     } else if (!password) {
         showAlert('رمز عبور خالی می‌باشد.', 'danger')
-    } else if (email != '1111@gmail.com') {
-        showAlert('ایمیل ورودی صحیح نمی‌باشد', 'danger');
-    } else if (password != '1111') {
-        showAlert('رمز عبور صحیح نمی‌باشد‌', 'danger');
     } else {
-        showAlert('ورود موفقیت آمیز بود', 'success')
+        // showAlert('ورود موفقیت آمیز بود', 'success')
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                const { message } = JSON.parse(xhttp.responseText);
+                const { token } = JSON.parse(xhttp.responseText);
+                if (message == 'filled `email` is not valid') {
+                    showAlert('فرمت ایمیل ورودی صحیح نمی‌باشد', 'danger');
+                }
+                else if (message == 'Request Length should be 2') {
+                    showAlert('خطا در ارسال اطلاعات (طول درخواست ۲ نبود)', 'danger');
+                }
+                else if (message == 'wrong email or password') {
+                    showAlert('ایمیل ورودی یا رمز عبور صحیح نیست', 'danger');
+                }
+                else if (message == 'Only `Post` Method is Valid') {
+                    showAlert('خطا در ارسال اطلاعات (از متود پست باید استفاده شود)', 'danger');
+                }
+                else if (token) {
+                    showAlert('در حال انتقال به پنل کاربری...', 'success');
+                }
+            }
+        }
+    };
+    // todo check url
+    xhttp.open("POST", "http://localhost/api/signup", true);
+    let body = {
+        email: email,
+        password: password
     }
+    xhttp.send(body);
 }
 
 setup = function () {
@@ -240,7 +295,7 @@ backToHome = function () {
     let duration = 1500
     loadEndingAnimation(duration)
     setTimeout(() => {
-        window.location.href = "./index.html"
+        window.location.href = "./main.html"
     }, duration + 300);
 }
 
