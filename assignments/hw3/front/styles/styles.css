@@ -180,6 +180,10 @@ body.dark-mode>div>div>div>div>table {
   color: white;
 }
 
+.addcard:hover {
+  cursor: pointer;
+}
+
 .table-striped>tbody>tr>td,
 .table-striped>thead>tr>th {
   border: 1px solid #d1e4f3;
