@@ -104,7 +104,7 @@ checkFormRegister = function () {
                 }
                 else if (message == 'user has been created') {
                     showAlert('حساب کاربری با موفقیت ساخته شد', 'success');
-                    // todo where to store token
+                    window.localStorage.setItem('token',token);
                 }
             }
         };
