@@ -81,6 +81,7 @@ function editPost(elem){
       const answers = JSON.stringify(result.value)
       
       // making request
+      let token = window.localStorage.getItem('token')
       let xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function () {
           if (this.readyState == 4) {
@@ -113,6 +114,7 @@ function editPost(elem){
           title: answers[0], 
           content: answers[1]
       }
+      xhttp.setRequestHeader('authorization',token )
       xhttp.send(body);
       
       
@@ -138,6 +140,7 @@ function addPost(){
   ]).then((result) => {
     if (result.value) {
       const answers = JSON.stringify(result.value)
+      let token = window.localStorage.getItem('token')
       let xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function () {
           if (this.readyState == 4) {
@@ -170,6 +173,7 @@ function addPost(){
           title: answers[0], 
           content: answers[1]
       }
+      xhttp.setRequestHeader('authorization',token )
       xhttp.send(body);
     }
   })
@@ -188,6 +192,7 @@ function deletePost(){
     cancelButtonText: 'خیر'
   }).then((result) => {
     if (result.isConfirmed) {
+      let token = window.localStorage.getItem('token')
       let xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function () {
           if (this.readyState == 4) {
@@ -217,6 +222,7 @@ function deletePost(){
           title: answers[0], 
           content: answers[1]
       }
+      xhttp.setRequestHeader('authorization',token )
       xhttp.send(body);
     }
   })
@@ -225,6 +231,7 @@ function deletePost(){
 
 
 function getPostsAdmin(){
+  let token = window.localStorage.getItem('token')
   let xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
@@ -239,6 +246,7 @@ function getPostsAdmin(){
     };
 
   xhttp.open("GET", "http://localhost/api/admin/post/crud", true);
+  xhttp.setRequestHeader('authorization',token )
   xhttp.send();
 }
 

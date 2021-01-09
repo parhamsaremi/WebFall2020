@@ -90,6 +90,7 @@ checkFormRegister = function () {
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4) {
                 const { message } = JSON.parse(xhttp.responseText);
+                const { token } = JSON.parse(xhttp.responseText);
                 if (message == 'Request Length should be 2') {
                     showAlert('خطا در ارسال اطلاعات (طول درخواست ۲ نبود)', 'danger');
                 }
