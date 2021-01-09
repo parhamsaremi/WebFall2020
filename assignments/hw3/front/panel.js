@@ -235,7 +235,7 @@ function getPostsAdmin(){
   let xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-          posts = this.responseText.posts;
+          const {posts} = this.response;
           let template = getAddCard();
           for (let i = 0; i < posts.length; i++) {
               let post = posts[i];
@@ -245,8 +245,9 @@ function getPostsAdmin(){
       }
     };
 
-  xhttp.open("GET", "http://localhost/api/admin/post/crud", true);
-  xhttp.setRequestHeader('authorization',token )
+  xhttp.open("GET", "http://localhost:3000/api/admin/post/crud", true);
+  xhttp.setRequestHeader('authorization', token);
+  xhttp.responseType = 'json';
   xhttp.send();
 }
 
