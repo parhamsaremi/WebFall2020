@@ -149,6 +149,7 @@ checkFormLogin = function () {
                 else if (token) {
                     showAlert('در حال انتقال به پنل کاربری...', 'success');
                     window.localStorage.setItem('token',token);
+                    window.location.href =  window.location.href.replace('register', 'panel');
                 }
             }
         };
