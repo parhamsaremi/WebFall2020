@@ -28,46 +28,39 @@ function loadPostPage(){
   document.getElementById("postPage").style.borderBottom = "thick solid";
   document.getElementById("dataTable").innerHTML = "";
   document.getElementById("smallDataTable").innerHTML = "";
-  addCard = `
+  
+
+  template = getAddCard() + getPostsAdmin();
+  document.getElementById("dataGrid").innerHTML = template;
+}
+
+function getAddCard(){
+  return `
   <span class="card addcard text-white bg-success mb-3" style="width:auto;min-width: 150px;min-height=400px;" onclick="addPost()">
   <div class="card-body">
 
   <?xml version="1.0"?><svg fill="#000000" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 128 128" width="175px" height="175px" style="margin-top:40%;margin-left:10%">    <path d="M 64 6.0507812 C 49.15 6.0507812 34.3 11.7 23 23 C 0.4 45.6 0.4 82.4 23 105 C 34.3 116.3 49.2 122 64 122 C 78.8 122 93.7 116.3 105 105 C 127.6 82.4 127.6 45.6 105 23 C 93.7 11.7 78.85 6.0507812 64 6.0507812 z M 64 12 C 77.3 12 90.600781 17.099219 100.80078 27.199219 C 121.00078 47.499219 121.00078 80.500781 100.80078 100.80078 C 80.500781 121.10078 47.500781 121.10078 27.300781 100.80078 C 7.0007813 80.500781 6.9992188 47.499219 27.199219 27.199219 C 37.399219 17.099219 50.7 12 64 12 z M 64 42 C 62.3 42 61 43.3 61 45 L 61 61 L 45 61 C 43.3 61 42 62.3 42 64 C 42 65.7 43.3 67 45 67 L 61 67 L 61 83 C 61 84.7 62.3 86 64 86 C 65.7 86 67 84.7 67 83 L 67 67 L 83 67 C 84.7 67 86 65.7 86 64 C 86 62.3 84.7 61 83 61 L 67 61 L 67 45 C 67 43.3 65.7 42 64 42 z"/></svg>
   </div>`
-  
-  infoCard = `</span>
-  <span class="card border-light mb-3" style="min-width: 150px;min-height:400px;">
-  <div class="card-header">تاریخ</div>
+}
+function getInfoCard(date, title, content, id){
+  return `</span>
+  <span class="card border-light mb-3" style="min-width: 150px;min-height:400px;" id = "post-${id}">
+  <div class="card-header">${date}</div>
   <div class="card-body" style="position: relative;">
-    <h5 class="card-title">فرستنده</h5>
-    <p class="card-text">متن نمونه</p>
+    <h5 class="card-title">${title}</h5>
+    <p class="card-text">${content}</p>
     <div class="justify-content-center" style="position: absolute; bottom:10px;">
       <button type="button" class="btn btn-danger" onclick="deletePost()">حذف</button>
       <button type="button" class="btn btn-warning" onclick="editPost(this)">تغییر</button>
     </div>
   </div>
 </span>`
-
-document.getElementById("dataGrid").innerHTML = addCard + infoCard
-
-
 }
 
-
 function editPost(elem){
-
-  /**very important:  change this function if structure of cards is changed
-  !!
-  !!
-  !!
-  !!
-  !!
-  !!
-  !!
-  !!
-  **/
   initialHeader = elem.parentElement.parentElement.getElementsByTagName('h5')[0].innerHTML
   initialText = elem.parentElement.parentElement.getElementsByTagName('p')[0].innerHTML
+  id = elem.parentElement.parentElement.parentElement.id.split("-")[1]
   Swal.mixin({
     confirmButtonText: 'بعدی &rarr;',
     showCancelButton: true,
@@ -86,11 +79,43 @@ function editPost(elem){
   ]).then((result) => {
     if (result.value) {
       const answers = JSON.stringify(result.value)
-      Swal.fire({
-        title: 'با موفقیت انجام شد.',
-        icon:'success',
-        confirmButtonText: 'خروج!'
-      })
+      
+      // making request
+      let xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+          if (this.readyState == 4) {
+              const { message } = JSON.parse(xhttp.responseText);
+              if(xhttp.status == 400 || xhttp.status == 401){
+                Swal.fire({
+                  title: message,
+                  icon:'warning',
+                  confirmButtonText: 'خروج!'
+                })
+              }
+              else if(xhttp.status == 204){
+                Swal.fire({
+                  title: 'عملیات با موفقیت انجام شد.',
+                  icon:'success',
+                  confirmButtonText: 'خروج!'
+                })
+              }else{
+                Swal.fire({
+                  title: 'undefined action',
+                  icon:'warning',
+                  confirmButtonText: 'خروج!'
+                })
+              }
+          }
+      };
+      // todo check url
+      xhttp.open("PUT", "http://localhost/api/admin/post/crud/"+id, true);
+      let body = {
+          title: answers[0], 
+          content: answers[1]
+      }
+      xhttp.send(body);
+      
+      
     }
   })
 
@@ -113,16 +138,45 @@ function addPost(){
   ]).then((result) => {
     if (result.value) {
       const answers = JSON.stringify(result.value)
-      Swal.fire({
-        title: 'با موفقیت انجام شد.',
-        icon:'success',
-        confirmButtonText: 'خروج!'
-      })
+      let xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+          if (this.readyState == 4) {
+              const { message } = JSON.parse(xhttp.responseText);
+              if(xhttp.status == 400){
+                Swal.fire({
+                  title: message,
+                  icon:'warning',
+                  confirmButtonText: 'خروج!'
+                })
+              }
+              else if(xhttp.status == 201){
+                Swal.fire({
+                  title: 'عملیات با موفقیت انجام شد.',
+                  icon:'success',
+                  confirmButtonText: 'خروج!'
+                })
+              }else{
+                Swal.fire({
+                  title: 'undefined action',
+                  icon:'warning',
+                  confirmButtonText: 'خروج!'
+                })
+              }
+          }
+      };
+      // todo check url
+      xhttp.open("POST", "http://localhost/api/admin/post/crud", true);
+      let body = {
+          title: answers[0], 
+          content: answers[1]
+      }
+      xhttp.send(body);
     }
   })
 }
 
 function deletePost(){
+  id = elem.parentElement.parentElement.parentElement.id.split("-")[1]
   Swal.fire({
     title: 'آیا از حذف پست مطمئنید؟',
     text: "این عمل غیر قابل برگشت است.",
@@ -134,12 +188,58 @@ function deletePost(){
     cancelButtonText: 'خیر'
   }).then((result) => {
     if (result.isConfirmed) {
-      Swal.fire(
-        'فایل شما با موفقیت حذف شد'
-      )
+      let xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+          if (this.readyState == 4) {
+              const { message } = JSON.parse(xhttp.responseText);
+              if(xhttp.status == 400 || xhttp.status == 401 || xhttp.status == 404){
+                Swal.fire({
+                  title: message,
+                  icon:'warning',
+                  confirmButtonText: 'خروج!'
+                })
+              }
+              else if(xhttp.status == 204){
+                Swal.fire(
+                  'پست شما با موفقیت حذف شد'
+                )
+              }else{
+                Swal.fire({
+                  title: 'undefined action',
+                  icon:'warning',
+                  confirmButtonText: 'خروج!'
+                })
+              }
+          }
+      };
+      xhttp.open("DELETE", "http://localhost/api/admin/post/crud/"+id, true);
+      let body = {
+          title: answers[0], 
+          content: answers[1]
+      }
+      xhttp.send(body);
     }
   })
 
+}
+
+
+function getPostsAdmin(){
+  let xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+          posts = this.responseText.posts;
+          let template = getAddCard();
+          for (let i = 0; i < posts.length; i++) {
+              let post = posts[i];
+              template += getInfoCard(post.created_at, post.title, post.content, post.id);
+          }
+          return template;
+      }
+    };
+
+  xhttp.open("GET", "http://localhost/api/admin/post/crud", true);
+  xhttp.send();
 }
 
 
