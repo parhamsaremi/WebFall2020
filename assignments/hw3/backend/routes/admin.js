@@ -4,8 +4,8 @@ const db = require('../db')
 const router = new Router()
 
 const isNum = (value) => /^\d+$/.test(value);
-const checkTitle = (title) => /^[0-9a-zA-Z!?.()]+$/.test(title);
-const checkContent = (content) => /^[0-9a-zA-Z!?.()\n]+$/.test(content);
+const checkTitle = (title) => /^[0-9a-zA-Z!?.() ]+$/.test(title);
+const checkContent = (content) => /^[0-9a-zA-Z!?.()\n ]+$/.test(content);
 
 router.get('/user/crud/:id?', async (req, res) => {
     const { id } = req.params
