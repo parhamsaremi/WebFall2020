@@ -265,6 +265,43 @@ function loadInfoPage(){
   document.getElementById("dataPage").style.borderBottom = "none";
   document.getElementById("homePage").style.borderBottom = "none";
   document.getElementById("postPage").style.borderBottom = "none";
+  document.getElementById("dataGrid").innerHTML = ""
+
+  // let temp = userDetailHTML('a', 'b', 'c')
+  // document.getElementById("dataTable").innerHTML = temp;
+  
+  let token = window.localStorage.getItem('token')
+  let xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+          const {user} = this.response;
+          let temp = userDetailHTML(user.created_at, user.id, user.email)
+          document.getElementById("dataTable").innerHTML = temp;
+      }
+    };
+
+  xhttp.open("GET", "http://localhost/api/admin/user/crud/1", true);
+  xhttp.setRequestHeader('authorization', token);
+  xhttp.responseType = 'json';
+  xhttp.send();
+  
+}
+
+function userDetailHTML(created_at, id, email){
+
+  return `
+    <form>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address: ${email}</label>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">id: ${id}</label>
+    </div>
+    <div class="form-group">
+      <label class="form-check-label" for="exampleCheck1">Created at: ${created_at}</label>
+    </div>
+  </form>
+  `
 
 }
 
