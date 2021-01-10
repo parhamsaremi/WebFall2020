@@ -1,3 +1,7 @@
+let posts_count = 10
+let posts_start = 0
+let post_list = []
+
 setup = function () {
   // checkToken();
   loadStartingAnimation();
@@ -33,6 +37,9 @@ function loadPostPage() {
   document.getElementById("postPage").style.borderBottom = "thick solid";
   document.getElementById("dataTable").innerHTML = "";
   document.getElementById("smallDataTable").innerHTML = "";
+  document.getElementById("prevButton").display = "block"
+  document.getElementById("nextButton").display = "block"
+  document.getElementById("panelButtons").style.display = "flex";
   getPostsAdmin();
   // document.getElementById("dataGrid").innerHTML = getInfoCard("1","2","3","4")
 }
@@ -266,7 +273,7 @@ function getPostsAdmin() {
   let token = window.localStorage.getItem("token");
   let xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
-    const { message } = JSON.parse(xhttp.responseText);
+    let message = xhttp.response.message;
     if (message === "invalid token") {
       Swal.fire("شما اجازه‌ی دسترسی به این صفحه را ندارید").then(() => {
         window.location.replace("./register.html");
@@ -274,18 +281,8 @@ function getPostsAdmin() {
     }
     if (this.readyState == 4 && this.status == 200) {
       const { posts } = this.response;
-      let template = ``
-      for (let i = 0; i < posts.length; i++) {
-        let post = posts[i];
-        template += getInfoCard(
-          post.created_at,
-          post.title,
-          post.content,
-          post.id
-        );
-      }
-      template += getAddCard()
-      document.getElementById("dataGrid").innerHTML = template;
+      post_list = posts
+      showPostList(posts_count, posts_start)
     }
   };
 
@@ -295,11 +292,41 @@ function getPostsAdmin() {
   xhttp.send();
 }
 
+function showPostList(count, start){
+  let template = ``
+      for (let i = start; i < min(count+start, post_list.length); i++) {
+        let post = post_list[i];
+        template += getInfoCard(
+          post.created_at,
+          post.title,
+          post.content,
+          post.id
+        );
+      }
+      template += getAddCard()
+      document.getElementById("dataGrid").innerHTML = template;
+}
+
+function showNextPosts(){
+  if(posts_start + posts_count<post_list.length){
+    posts_start+=posts_count
+  }
+  showPostList()
+}
+function showPrevPosts(){
+  if(posts_start - posts_count>=0){
+    posts_start-=posts_count
+  }
+  showPostList()
+}
+
 function loadInfoPage() {
   document.getElementById("infoPage").style.borderBottom = "thick solid";
   document.getElementById("postPage").style.borderBottom = "none";
   document.getElementById("dataGrid").innerHTML = "";
-
+  document.getElementById("prevButton").display = "none"
+  document.getElementById("nextButton").display = "none"
+  document.getElementById("panelButtons").style.display = "none";
   // let temp = userDetailHTML('a', 'b', 'c')
   // document.getElementById("dataTable").innerHTML = temp;
 
