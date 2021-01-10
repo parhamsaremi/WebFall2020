@@ -1,12 +1,6 @@
 setup = function () {
-  checkToken();
+  // checkToken();
   loadStartingAnimation();
-  document
-    .getElementById("homePage")
-    .addEventListener("click", () => fillGrid());
-  document
-    .getElementById("dataPage")
-    .addEventListener("click", () => loadTable());
   document
     .getElementById("customSwitches")
     .addEventListener("click", () => toggleDarkMode());
@@ -36,8 +30,6 @@ function checkToken() {
 
 function loadPostPage() {
   document.getElementById("infoPage").style.borderBottom = "none";
-  document.getElementById("dataPage").style.borderBottom = "none";
-  document.getElementById("homePage").style.borderBottom = "none";
   document.getElementById("postPage").style.borderBottom = "thick solid";
   document.getElementById("dataTable").innerHTML = "";
   document.getElementById("smallDataTable").innerHTML = "";
@@ -304,8 +296,6 @@ function getPostsAdmin() {
 
 function loadInfoPage() {
   document.getElementById("infoPage").style.borderBottom = "thick solid";
-  document.getElementById("dataPage").style.borderBottom = "none";
-  document.getElementById("homePage").style.borderBottom = "none";
   document.getElementById("postPage").style.borderBottom = "none";
   document.getElementById("dataGrid").innerHTML = "";
 
@@ -378,8 +368,6 @@ toggleValue = (template, value1, value2) => {
 };
 
 fillGrid = function () {
-  document.getElementById("homePage").style.borderBottom = "thick solid";
-  document.getElementById("dataPage").style.borderBottom = "none";
   document.getElementById("infoPage").style.borderBottom = "none";
   document.getElementById("postPage").style.borderBottom = "none";
   navigationMenuToggle("homepage_s");
@@ -400,8 +388,6 @@ fillGrid = function () {
 };
 
 loadTable = () => {
-  document.getElementById("dataPage").style.borderBottom = "thick solid";
-  document.getElementById("homePage").style.borderBottom = "none";
   document.getElementById("infoPage").style.borderBottom = "none";
   document.getElementById("postPage").style.borderBottom = "none";
   navigationMenuToggle("datapage_s");
