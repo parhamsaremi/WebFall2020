@@ -7,8 +7,16 @@ const isNum = (value) => /^\d+$/.test(value);
 const checkTitle = (title) => /^[0-9a-zA-Z!?.()]+$/.test(title);
 const checkContent = (content) => /^[0-9a-zA-Z!?.()\n]+$/.test(content);
 
-router.get('/user/crud/:id', async (req, res) => {
+router.get('/user/crud/:id?', async (req, res) => {
     const { id } = req.params
+
+    if (!id) { // feature :)
+        const { rows: users } = await db.query("SELECT id, email, created_at FROM users WHERE email = $1", [req.user.email])
+        if (!users.length) {
+            return res.sendStatus(404) // to avoid internal error
+        }
+        return res.status(200).send({ user: users[0] })
+    }
 
     if (!isNum(id))
         return res.status(400).send({ message: 'url id is not valid' })
