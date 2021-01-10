@@ -1,4 +1,5 @@
 setup = function () {
+  // checkToken()
   loadStartingAnimation()
   document
     .getElementById("homePage")
@@ -20,6 +21,19 @@ setup = function () {
     .addEventListener("click", ()=> loadPostPage())
   document.documentElement.scrollTop = 0;
 };
+
+function checkToken(){
+  let token = window.localStorage.getItem('token')
+
+  if(token == null){
+    Swal.fire('شما اجازه‌ی دسترسی به این صفحه را ندارید').then(()=>{
+      window.location.replace('./register.html')
+    })
+  }else {
+    console.log(token)
+  }
+
+}
 
 function loadPostPage(){
   document.getElementById("infoPage").style.borderBottom = "none";
@@ -82,6 +96,11 @@ function editPost(elem){
       xhttp.onreadystatechange = function () {
           if (this.readyState == 4) {
               const { message } = JSON.parse(xhttp.responseText);
+              if(message==="invalid token"){
+                Swal.fire('شما اجازه‌ی دسترسی به این صفحه را ندارید').then(()=>{
+                  window.location.replace('./register.html')
+                })
+              }
               if(xhttp.status == 400 || xhttp.status == 401){
                 Swal.fire({
                   title: message,
@@ -143,6 +162,11 @@ function addPost(){
       xhttp.onreadystatechange = function () {
           if (this.readyState == 4) {
               const { message } = JSON.parse(xhttp.responseText);
+              if(message==="invalid token"){
+                Swal.fire('شما اجازه‌ی دسترسی به این صفحه را ندارید').then(()=>{
+                  window.location.replace('./register.html')
+                })
+              }
               if(xhttp.status == 400){
                 Swal.fire({
                   title: message,
@@ -197,6 +221,11 @@ function deletePost(elem){
       xhttp.onreadystatechange = function () {
           if (this.readyState == 4) {
               const { message } = JSON.parse(xhttp.responseText);
+              if(message==="invalid token"){
+                Swal.fire('شما اجازه‌ی دسترسی به این صفحه را ندارید').then(()=>{
+                  window.location.replace('./register.html')
+                })
+              }
               if(xhttp.status == 400 || xhttp.status == 401 || xhttp.status == 404){
                 Swal.fire({
                   title: message,
@@ -232,16 +261,22 @@ function getPostsAdmin(){
   let token = window.localStorage.getItem('token')
   let xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
-      if (this.readyState == 4 && this.status == 200) {
-          const {posts} = this.response;
-          let template = getAddCard();
-          for (let i = 0; i < posts.length; i++) {
-              let post = posts[i];
-              template += getInfoCard(post.created_at, post.title, post.content, post.id);
-          }
-          document.getElementById("dataGrid").innerHTML = template;
-      }
-    };
+    const { message } = JSON.parse(xhttp.responseText);
+    if(message==="invalid token"){
+      Swal.fire('شما اجازه‌ی دسترسی به این صفحه را ندارید').then(()=>{
+        window.location.replace('./register.html')
+      })
+    }
+    if (this.readyState == 4 && this.status == 200) {
+        const {posts} = this.response;
+        let template = getAddCard();
+        for (let i = 0; i < posts.length; i++) {
+            let post = posts[i];
+            template += getInfoCard(post.created_at, post.title, post.content, post.id);
+        }
+        document.getElementById("dataGrid").innerHTML = template;
+    }
+  };
 
   xhttp.open("GET", "http://localhost:3000/api/admin/post/crud", true);
   xhttp.setRequestHeader('authorization', token);
