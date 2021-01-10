@@ -280,7 +280,7 @@ function loadInfoPage(){
       }
     };
 
-  xhttp.open("GET", "http://localhost/api/admin/user/crud/1", true);
+  xhttp.open("GET", "http://localhost:3000/api/admin/user/crud/", true);
   xhttp.setRequestHeader('authorization', token);
   xhttp.responseType = 'json';
   xhttp.send();
