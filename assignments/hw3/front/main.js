@@ -78,7 +78,7 @@ fillPosts = () => {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            posts = this.responseText.posts;
+            posts = JSON.parse(this.responseText).posts;
             navigationMenuToggle("homepage_s")
             let template = "";
             for (let i = 0; i < posts.length; i++) {
@@ -98,7 +98,7 @@ fillPosts = () => {
         }
     };
     // todo check url
-    xhttp.open("GET", "http://localhost/api/post/", true);
+    xhttp.open("GET", "http://localhost:3000/api/post/", true);
     xhttp.send();
 }
 
