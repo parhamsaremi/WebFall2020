@@ -274,7 +274,7 @@ function getPostsAdmin() {
     }
     if (this.readyState == 4 && this.status == 200) {
       const { posts } = this.response;
-      let template = getAddCard();
+      let template = ``
       for (let i = 0; i < posts.length; i++) {
         let post = posts[i];
         template += getInfoCard(
@@ -284,6 +284,7 @@ function getPostsAdmin() {
           post.id
         );
       }
+      template += getAddCard()
       document.getElementById("dataGrid").innerHTML = template;
     }
   };
