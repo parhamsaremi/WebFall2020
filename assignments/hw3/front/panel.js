@@ -74,14 +74,15 @@ function editPost(elem){
     
   ]).then((result) => {
     if (result.value) {
-      const answers = JSON.stringify(result.value)
-      
       // making request
       let token = window.localStorage.getItem('token')
       let xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function () {
           if (this.readyState == 4) {
-              const { message } = JSON.parse(xhttp.responseText);
+              let message = 'عملیات با موفقیت انجام شد.';
+              if (xhttp.status !== 204) {
+                message =  xhttp.response.message;
+              }
               if(xhttp.status == 400 || xhttp.status == 401){
                 Swal.fire({
                   title: message,
@@ -91,7 +92,7 @@ function editPost(elem){
               }
               else if(xhttp.status == 204){
                 Swal.fire({
-                  title: 'عملیات با موفقیت انجام شد.',
+                  title: message,
                   icon:'success',
                   confirmButtonText: 'خروج!'
                 }).then((result)=>{
@@ -107,14 +108,12 @@ function editPost(elem){
           }
       };
       // todo check url
-      xhttp.open("PUT", "http://localhost/api/admin/post/crud/"+id, true);
-      let body = {
-          title: answers[0], 
-          content: answers[1]
-      }
+      xhttp.open("PUT", "http://localhost:3000/api/admin/post/crud/"+id, true);
       xhttp.setRequestHeader('authorization',token )
-      xhttp.send(body);
-      
+      xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhttp.responseType = 'json';
+      xhttp.send(`title=${result.value[0]}&content=${result.value[1]}`);
+      //
       
     }
   })
@@ -196,7 +195,10 @@ function deletePost(elem){
       let xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function () {
           if (this.readyState == 4) {
-              const { message } = JSON.parse(xhttp.responseText);
+            let message = 'پست شما با موفقیت حذف شد';
+              if (xhttp.status !== 204) {
+                message =  xhttp.response.message;
+              }
               if(xhttp.status == 400 || xhttp.status == 401 || xhttp.status == 404){
                 Swal.fire({
                   title: message,
@@ -206,7 +208,7 @@ function deletePost(elem){
               }
               else if(xhttp.status == 204){
                 Swal.fire(
-                  'پست شما با موفقیت حذف شد'
+                  message
                 ).then((result)=>{
                   loadPostPage()
                 })
@@ -219,8 +221,9 @@ function deletePost(elem){
               }
           }
       };
-      xhttp.open("DELETE", "http://localhost/api/admin/post/crud/"+id, true);
-      xhttp.setRequestHeader('authorization',token )
+      xhttp.open("DELETE", "http://localhost:3000/api/admin/post/crud/"+id, true);
+      xhttp.setRequestHeader('authorization', token);
+      xhttp.responseType = 'json';
       xhttp.send();
     }
   })
