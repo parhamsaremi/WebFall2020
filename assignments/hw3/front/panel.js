@@ -28,18 +28,7 @@ function loadPostPage(){
   document.getElementById("postPage").style.borderBottom = "thick solid";
   document.getElementById("dataTable").innerHTML = "";
   document.getElementById("smallDataTable").innerHTML = "";
-  
-
-  setPosts()
-}
-function setPosts(){
-  let a = getPostsAdmin()
-  let template = getAddCard()
-  if (a !== undefined){
-    template+=getPostsAdmin();
-  }
-  
-  document.getElementById("dataGrid").innerHTML = template;
+  getPostsAdmin()
 }
 function getAddCard(){
   return `
@@ -105,7 +94,7 @@ function editPost(elem){
                   icon:'success',
                   confirmButtonText: 'خروج!'
                 }).then((result)=>{
-                  setPosts()
+                  loadPostPage()
                 })
               }else{
                 Swal.fire({
@@ -166,7 +155,7 @@ function addPost(){
                   icon:'success',
                   confirmButtonText: 'خروج!'
                 }).then((result)=>{
-                  setPosts()
+                  loadPostPage()
                 })
               }else{
                 Swal.fire({
@@ -218,7 +207,7 @@ function deletePost(){
                 Swal.fire(
                   'پست شما با موفقیت حذف شد'
                 ).then((result)=>{
-                  setPosts()
+                  loadPostPage()
                 })
               }else{
                 Swal.fire({
@@ -249,7 +238,7 @@ function getPostsAdmin(){
               let post = posts[i];
               template += getInfoCard(post.created_at, post.title, post.content, post.id);
           }
-          return template;
+          document.getElementById("dataGrid").innerHTML = template;
       }
     };
 
