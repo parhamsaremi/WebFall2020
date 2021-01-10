@@ -1,5 +1,5 @@
 setup = function () {
-  // checkToken()
+  checkToken()
   loadStartingAnimation()
   document
     .getElementById("homePage")
