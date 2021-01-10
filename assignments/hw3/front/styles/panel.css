@@ -1,293 +1,399 @@
-.fade-in {
-    animation: fadeIn ease 1s;
-    -webkit-animation: fadeIn ease 1s;
-    -moz-animation: fadeIn ease 1s;
-    -o-animation: fadeIn ease 1s;
-    -ms-animation: fadeIn ease 1s;
-}
-
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-@-moz-keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-@-webkit-keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-@-o-keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-@-ms-keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-.fade {
-    -webkit-transition-duration: 1s;
-    /* Safari */
-    transition-duration: 1s;
-}
-
-.form-check-input {
-    text-align: right;
-}
-
-.form-check-label {
-    text-align: right;
-    margin-bottom: 12px;
-    margin-right: 18px;
-}
-
-#formDiv {
-    position: relative;
+* {
+  transition: 0.3s;
 }
 
 body {
-    background-color: #E8EFF7;
-    text-align: right;
+  overflow: hidden;
+}
+
+.navbar {
+  background-color: #e8eff7;
+  position: sticky !important;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+.navbar-brand {
+  width: 300px;
+  text-align: right;
+  padding-right: 10px;
+  padding-top: 0;
+}
+
+nav > div > button {
+  width: 120px;
+  border-width: 3px !important;
+}
+
+nav > div > .btn-primary,
+nav > div > .btn-outline-primary:hover,
+nav > div > .btn-outline-primary {
+  border-color: #186aa5;
+}
+
+nav > div > .btn-primary {
+  background-color: #186aa5;
+}
+
+nav > div > .btn-outline-primary:hover {
+  background-color: #186aa5;
+}
+
+#panelButtons > .btn-outline-primary,
+nav > div > .btn-outline-primary {
+  color: #186aa5;
+}
+
+#panelButtons > .btn-outline-primary {
+  border-color: #186aa5;
+}
+
+#panelButtons > .btn-outline-primary:hover {
+  background-color: #186aa5;
+  color: white;
+}
+
+#panelButtons > button {
+  width: 90px;
+  border-width: 3px !important;
+}
+
+.nav-item > a {
+  color: #186aa5;
+}
+
+.sidebar {
+  width: 300px;
+  height: 100%;
+  z-index: 1;
+  right: 0;
+  position: fixed;
+  background-color: #186aa5;
+  color: white;
+  font-size: large;
+  text-align: right;
+  justify-content: center;
+  padding-top: 50px;
+  padding-right: 50px;
+}
+
+.mainPanel {
+  margin-right: 300px;
+}
+
+.container {
+  margin-top: 50px;
+  justify-content: center;
+  display: flex;
+}
+
+.cards {
+  display: grid;
+  grid-auto-rows: auto;
+  grid-gap: 1rem;
+}
+
+@media (min-width: 1000px) {
+  .cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 1000px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .cards {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media (min-width: 600px) {
+  #dataTable {
+    display: "";
+  }
+
+  #smallDataTable {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  #dataTable {
+    display: none;
+  }
+
+  #smallDataTable {
+    display: "";
+  }
+}
+.post {
+  background-color: #373434 !important;
+  color: #e8eff7 !important;
+}
+body.dark-mode .post {
+  color: #373434 !important;
+  background-color: #e8eff7 !important;
+}
+
+body.dark-mode > div > div > div > div > table {
+  background-color: #f7e8e8 !important;
+  color: #a20101;
+  transition: 0.3s !important;
+}
+
+.cards > table {
+  background-color: #e8eff7;
+  color: #186aa5;
+  transition: 0.3s !important;
+}
+
+.card:hover {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  transition: 0.5s;
+}
+
+.tableDiv {
+  text-align: center;
+  transition: opacity 0.2s linear;
+  width: 130vh;
+  min-width: 70vh;
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+  background-color: #e8eff7;
+}
+
+.table-striped > tbody > tr:nth-child(even) > td,
+.table-striped > tbody > tr:nth-child(even) > th {
+  background-color: #ffffff;
+}
+
+.table-striped > thead {
+  background-color: #186aa5;
+  color: white;
+}
+
+.addcard:hover {
+  cursor: pointer;
+}
+
+.table-striped > tbody > tr > td,
+.table-striped > thead > tr > th {
+  border: 1px solid #d1e4f3;
+}
+
+/* <600 table: */
+.smallTable > tbody > tr > td {
+  padding: 10px;
+}
+
+.smallTable > tbody > tr > td:nth-child(even) {
+  text-align: left;
+}
+
+.smallTable > tbody > tr > td:nth-child(odd) {
+  text-align: right;
+}
+
+#panelButtons {
+  display: none;
+  /* changes to flex in panels */
+  margin-top: 20px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.scrollbar {
+  float: left;
+  height: 600px;
+  overflow-y: scroll;
+  margin-bottom: 25px;
+  padding: 5px;
+}
+
+.scrollbar-primary::-webkit-scrollbar {
+  width: 8px;
+  background: none;
+}
+
+.scrollbar-primary::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: lightgray;
+}
+
+.scrollbar-primary::-webkit-scrollbar-thumb:hover {
+  background-color: #186aa5;
+}
+
+.scrollbar-primary {
+  scrollbar-color: #186aa5 #f5f5f5;
+}
+
+body.dark-mode > nav > div > ul > li > a {
+  color: #a20101;
 }
 
 body.dark-mode {
-    background-color: #373434;
+  background-color: #373434;
 }
 
-body.dark-mode>nav {
-    background-color: #373434;
+body.dark-mode > nav {
+  background-color: #1c1516;
 }
 
-#logregdiv {
-    visibility: hidden;
-    position: relative;
-    float: left;
-    width: 40%;
-    height: 360px;
-    background-color: white;
+body.dark-mode > .sidebar {
+  background-color: #241d1d;
 }
 
-body.dark-mode #logregdiv {
-    background-color: #4e4444;
+body.dark-mode > .scrollbar-primary::-webkit-scrollbar-thumb:hover {
+  background-color: #a20101;
 }
 
-body.dark-mode>nav>div>a {
-    color: #bd4040;
+body.dark-mode > .scrollbar-primary {
+  scrollbar-color: #a20101 #f5f5f5;
 }
 
-body.dark-mode>nav>div>a:hover {
-    color: #d31919;
+/* Table Dark*/
+body.dark-mode
+  > div
+  > div
+  > div
+  > div
+  > .table-striped
+  > tbody
+  > tr:nth-child(odd)
+  > td,
+body.dark-mode
+  > div
+  > div
+  > div
+  > div
+  > .table-striped
+  > tbody
+  > tr:nth-child(odd)
+  > th {
+  background-color: #f7e8e8;
 }
 
-#blue-logo {
-    display: block;
+body.dark-mode > div > div > div > div > .table-striped > thead {
+  background-color: #dc3545;
+  color: white;
 }
 
-body.dark-mode #blue-logo {
-    display: none;
+.custom-control-input:checked ~ .custom-control-label::before {
+  color: #fff;
+  border-color: #a20101 !important;
+  background-color: #a20101 !important;
 }
 
-body.dark-mode #red-logo {
-    display: block;
+.custom-control-input:focus ~ .custom-control-label::before {
+  box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.2) !important;
 }
 
-#red-logo {
-    display: none;
+/* responsive design */
+#toggle-div > svg {
+  transition: 0s !important;
 }
 
-#registerTab {
-    border-color: white;
-    background-color: white;
+#toggle-div > svg:hover {
+  cursor: pointer;
 }
 
-body.dark-mode #registerTab {
-    border-color: #4e4444;
-    background-color: #4e4444;
-    color: #fa7777;
+#toggle-div > svg > g {
+  transition: 0s !important;
 }
 
-#registerTab.active {
-    background-color: #186aa5;
-    color: white;
+#toggle-div > svg > g > g {
+  transition: 0s !important;
 }
 
-body.dark-mode #registerTab.active {
-    background-color: #bd4040;
-    color: white;
+#toggle-div > svg {
+  fill: #186aa5;
 }
 
-#loginTab {
-    border-color: white;
-    background-color: white;
+body.dark-mode #toggle-div > svg {
+  fill: #a20101;
 }
 
-body.dark-mode #loginTab {
-    border-color: #4e4444;
-    background-color: #4e4444;
-    color: #fa7777;
+#bottom-navbar {
+  display: none;
+  position: fixed !important;
+  bottom: 0;
+  top: auto;
 }
 
-#loginTab.active {
-    background-color:#186aa5;
-    color: white;
+#bottom-navbar > div > ul > li {
+  width: 25%;
+  color: #186aa5;
 }
 
-body.dark-mode #loginTab.active {
-    background-color: #bd4040;
-    color: white;
+body.dark-mode #bottom-navbar > div > ul > li {
+  color: #a20101;
 }
 
-#check-rules:hover {
-    cursor: pointer;
+#bottom-navbar > div > ul > li.active {
+  border-bottom: thick solid;
 }
 
-body.dark-mode #check-rules {
-    color: red !important;
+#bottom-navbar > div > ul > li:hover {
+  background-color: rgb(153, 182, 245);
 }
 
-body.dark-mode #check-rules-label {
-    color: white;
+body.dark-mode #bottom-navbar > div > ul > li:hover {
+  background-color: #bd4040;
 }
 
-#submit-button {
-    background-color: #186aa5;
-    border-color: #186aa5;
-}
-
-body.dark-mode #submit-button {
-    background-color: #bd4040;
-    border-color: #bd4040;
-}
-
-* {
-    transition: 0.3s;
-}
-
-#image-light {
-    height: 360px;
-    width: 100%;
-    visibility: hidden;
-    left: 300px;
-    position: relative;
-    display: block;
-}
-
-body.dark-mode #image-light {
-    display: none;
-}
-
-#image-dark {
-    height: 360px;
-    width: 100%;
-    visibility: hidden;
-    left: 300px;
-    position: relative;
-    display: none;
-}
-
-body.dark-mode #image-dark {
-    display: block;
-}
-
-#return-home-text, #return-home-icon {
-    cursor: pointer;
-}
-
-@media (max-width:600px) {
-    /* your conditional / responsive CSS inside this condition */
-    #img-container, #image-blue, #image-red, #note {
-        display: none !important;
-        visibility: hidden !important;
-    }
-    #div1{
-        padding-top: 10%;
-    }
-}
-
-#top-navbar {
+@media (max-width: 600px) {
+  #sidebar.active {
     opacity: 0;
-}
+    margin-left: -300px;
+  }
 
-#logregdiv {
-    right: 300px;
-}
+  #sidebar {
+    left: 0;
+    right: auto;
+    z-index: 1;
+  }
 
-.custom-control-input:checked~.custom-control-label::before {
-    color: #fff;
-    border-color: #a20101 !important;
-    background-color: #a20101 !important;
-}
+  #toggle-div {
+    display: block !important;
+  }
 
-.custom-control-input:focus~.custom-control-label::before {
-    box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.2) !important;
-}
+  #login-div {
+    display: none !important;
+  }
 
-body.dark-mode #dark-btn-label {
-    color: #bd4040;
-    border-color: #bd4040;
-}
+  .mainPanel {
+    margin-right: 0px;
+  }
 
-.custom-control {
-    margin-top: 15px;
-}
-
-#img-container {
-    position: relative;
-    text-align: center;
-    color: white;
-}
-
-.img-text{
-    font-weight: bold;
-    opacity: 0;
-    font-size: 20pt;
-    text-align: center;
-    position: absolute;
-    top: 80%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-#img-text-light {
-    text-shadow: 2px 1px 3px rgb(0, 0, 0);
-    display: block;
-}
-
-body.dark-mode #image-text-light {
+  #home-data {
     display: none;
-}
+  }
 
-#img-text-dark {
-    text-shadow: 2px 1px 3px #ff0000;
-    display: none;
-}
-
-body.dark-mode #img-text-dark {
+  #bottom-navbar {
     display: block;
+    height: 65px;
+    box-shadow: 0 -0.15rem 1rem rgba(0, 0, 0, 0.1) !important;
+  }
+
+  #panelButtons {
+    margin-bottom: 80px;
+  }
+
+  .container {
+    margin-top: 10px;
+  }
+
+  #dataGrid {
+    width: 300px;
+  }
 }
