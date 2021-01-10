@@ -45,7 +45,7 @@ function getInfoCard(date, title, content, id){
     <h5 class="card-title">${title}</h5>
     <p class="card-text">${content}</p>
     <div class="justify-content-center" style="position: absolute; bottom:10px;">
-      <button type="button" class="btn btn-danger" onclick="deletePost()">حذف</button>
+      <button type="button" class="btn btn-danger" onclick="deletePost(this)">حذف</button>
       <button type="button" class="btn btn-warning" onclick="editPost(this)">تغییر</button>
     </div>
   </div>
@@ -178,7 +178,7 @@ function addPost(){
   })
 }
 
-function deletePost(){
+function deletePost(elem){
   id = elem.parentElement.parentElement.parentElement.id.split("-")[1]
   Swal.fire({
     title: 'آیا از حذف پست مطمئنید؟',
