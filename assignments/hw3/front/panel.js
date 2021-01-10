@@ -29,6 +29,7 @@ function loadPostPage(){
   document.getElementById("dataTable").innerHTML = "";
   document.getElementById("smallDataTable").innerHTML = "";
   getPostsAdmin()
+  // document.getElementById("dataGrid").innerHTML = getInfoCard("1","2","3","4")
 }
 function getAddCard(){
   return `
@@ -220,7 +221,7 @@ function deletePost(elem){
       };
       xhttp.open("DELETE", "http://localhost/api/admin/post/crud/"+id, true);
       xhttp.setRequestHeader('authorization',token )
-      xhttp.send(body);
+      xhttp.send();
     }
   })
 
