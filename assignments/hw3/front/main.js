@@ -1,58 +1,6 @@
 let posts_count = 8;
 let posts_start = 0;
-let posts = JSON.parse(`{
-    "posts": [
-        {
-            "id": 1,
-            "title": "first post",
-            "content": "content of first post",
-            "created_by": 1,
-            "created_at": "2021-01-05"
-        },
-        {
-            "id": 2,
-            "title": "second post",
-            "content": "content of second post",
-            "created_by": 2,
-            "created_at": "2021-01-05"
-        },
-        {
-            "id": 3,
-            "title": "testTitle",
-            "content": "testContent",
-            "created_by": 3,
-            "created_at": "2021-01-06"
-        },
-        {
-            "id": 11,
-            "title": "test5",
-            "content": "test5Content",
-            "created_by": 3,
-            "created_at": "2021-01-10"
-        },
-        {
-            "id": 15,
-            "title": "test8",
-            "content": "test8Content",
-            "created_by": 3,
-            "created_at": "2021-01-10"
-        },
-        {
-            "id": 14,
-            "title": "test70",
-            "content": "test7Content",
-            "created_by": 3,
-            "created_at": "2021-01-10"
-        },
-        {
-            "id": 16,
-            "title": "parham",
-            "content": "noice",
-            "created_by": 3,
-            "created_at": "2021-01-10"
-        }
-    ]
-}`).posts;
+let posts = [];
 setup = function () {
   loadStartingAnimation();
   document
@@ -111,7 +59,7 @@ fillGrid = function () {
   //
   let template = "";
   for (let i = 0; i < 20; i++) {
-    template += `<span class="card" style="width: auto; min-width: 150px">
+    template += `<span class="post" style="width: auto; min-width: 150px">
     <img class="card-img-top" src="./assets/multi_logo_200x200.png" alt="Card image cap">
     <div class="card-body">
       <p class="card-text">کارت ${i + 1}</p>
@@ -150,7 +98,7 @@ function showPostList() {
   let template = "";
   for (let i = posts_start;i < Math.min(posts.length, posts_start + posts_count);i++) {
     let post = posts[i];
-    template += `<div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+    template += `<div class="post text-white bg-secondary mb-3" style="max-width: 18rem;">
                     <div class="card-body">
                     <h5 class="card-title">${post.title}</h5>
                     <p class="card-text">${post.content}</p>

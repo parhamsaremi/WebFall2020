@@ -136,6 +136,9 @@ nav>div>.btn-outline-primary {
 .card {
   background-color: #e8eff7 !important;
 }
+body.dark > .post {
+  background-color: #241d1d !important;
+}
 
 body.dark-mode>div>div>div>div>.card {
   background-color: #f7e8e8 !important;
