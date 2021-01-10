@@ -39,7 +39,6 @@ function loadPostPage() {
   document.getElementById("smallDataTable").innerHTML = "";
   document.getElementById("prevButton").display = "block"
   document.getElementById("nextButton").display = "block"
-  document.getElementById("panelButtons").style.display = "flex";
   getPostsAdmin();
   // document.getElementById("dataGrid").innerHTML = getInfoCard("1","2","3","4")
 }
@@ -282,7 +281,7 @@ function getPostsAdmin() {
     if (this.readyState == 4 && this.status == 200) {
       const { posts } = this.response;
       post_list = posts
-      showPostList(posts_count, posts_start)
+      showPostList()
     }
   };
 
@@ -292,9 +291,9 @@ function getPostsAdmin() {
   xhttp.send();
 }
 
-function showPostList(count, start){
+function showPostList(){
   let template = ``
-      for (let i = start; i < min(count+start, post_list.length); i++) {
+      for (let i = 0; i < post_list.length; i++) {
         let post = post_list[i];
         template += getInfoCard(
           post.created_at,
@@ -305,19 +304,6 @@ function showPostList(count, start){
       }
       template += getAddCard()
       document.getElementById("dataGrid").innerHTML = template;
-}
-
-function showNextPosts(){
-  if(posts_start + posts_count<post_list.length){
-    posts_start+=posts_count
-  }
-  showPostList()
-}
-function showPrevPosts(){
-  if(posts_start - posts_count>=0){
-    posts_start-=posts_count
-  }
-  showPostList()
 }
 
 function loadInfoPage() {
