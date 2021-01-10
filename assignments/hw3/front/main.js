@@ -90,7 +90,6 @@ fillPosts = () => {
   // todo check url
   xhttp.open("GET", "http://localhost:3000/api/post/", true);
   xhttp.send();
-  showPostList();
 };
 
 function showPostList() {

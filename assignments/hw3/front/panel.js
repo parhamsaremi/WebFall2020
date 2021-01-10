@@ -1,58 +1,6 @@
 let posts_count = 10
 let posts_start = 0
-let post_list = JSON.parse(`{
-  "posts": [
-      {
-          "id": 1,
-          "title": "first post",
-          "content": "content of first post",
-          "created_by": 1,
-          "created_at": "2021-01-05"
-      },
-      {
-          "id": 2,
-          "title": "second post",
-          "content": "content of second post",
-          "created_by": 2,
-          "created_at": "2021-01-05"
-      },
-      {
-          "id": 3,
-          "title": "testTitle",
-          "content": "testContent",
-          "created_by": 3,
-          "created_at": "2021-01-06"
-      },
-      {
-          "id": 11,
-          "title": "test5",
-          "content": "test5Content",
-          "created_by": 3,
-          "created_at": "2021-01-10"
-      },
-      {
-          "id": 15,
-          "title": "test8",
-          "content": "test8Content",
-          "created_by": 3,
-          "created_at": "2021-01-10"
-      },
-      {
-          "id": 14,
-          "title": "test70",
-          "content": "test7Content",
-          "created_by": 3,
-          "created_at": "2021-01-10"
-      },
-      {
-          "id": 16,
-          "title": "parham",
-          "content": "noice",
-          "created_by": 3,
-          "created_at": "2021-01-10"
-      }
-  ]
-}`).posts
+let post_list = []
 
 setup = function () {
   // checkToken();
@@ -341,7 +289,6 @@ function getPostsAdmin() {
   xhttp.setRequestHeader("authorization", token);
   xhttp.responseType = "json";
   xhttp.send();
-  showPostList()
 }
 
 function showPostList(){
