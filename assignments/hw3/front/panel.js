@@ -292,13 +292,13 @@ function userDetailHTML(created_at, id, email){
   return `
     <form>
     <div class="form-group">
-      <label for="exampleInputEmail1">Email address: ${email}</label>
+      <label>Email address: ${email}</label>
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">id: ${id}</label>
+      <label>id: ${id}</label>
     </div>
     <div class="form-group">
-      <label class="form-check-label" for="exampleCheck1">Created at: ${created_at}</label>
+      <label>Created at: ${created_at}</label>
     </div>
   </form>
   `
