@@ -113,7 +113,6 @@ function editPost(elem){
       xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
       xhttp.responseType = 'json';
       xhttp.send(`title=${result.value[0]}&content=${result.value[1]}`);
-      //
       
     }
   })
@@ -136,12 +135,11 @@ function addPost(){
     
   ]).then((result) => {
     if (result.value) {
-      const answers = JSON.stringify(result.value)
       let token = window.localStorage.getItem('token')
       let xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function () {
           if (this.readyState == 4) {
-              const { message } = JSON.parse(xhttp.responseText);
+              const { message } = xhttp.response;
               if(xhttp.status == 400){
                 Swal.fire({
                   title: message,
@@ -167,13 +165,12 @@ function addPost(){
           }
       };
       // todo check url
-      xhttp.open("POST", "http://localhost/api/admin/post/crud", true);
-      let body = {
-          title: answers[0], 
-          content: answers[1]
-      }
-      xhttp.setRequestHeader('authorization',token )
-      xhttp.send(body);
+      xhttp.open("POST", "http://localhost:3000/api/admin/post/crud", true);
+      xhttp.setRequestHeader('authorization', token);
+      xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhttp.responseType = 'json';
+      xhttp.send(`title=${result.value[0]}&content=${result.value[1]}`);
+
     }
   })
 }
