@@ -363,15 +363,19 @@ function loadInfoPage() {
 
 function userDetailHTML(created_at, id, email) {
   return `
-    <form>
+    <form style="font-size:18px">
     <div class="form-group">
-      <label>ایمیل: ${email}</label>
+      <h3>مشخصات کاربر</h3>
+      <hr>
     </div>
     <div class="form-group">
-      <label>شناسه کاربری: ${id}</label>
+      <label><b>ایمیل:</b> ${email}</label>
     </div>
     <div class="form-group">
-      <label>تاریخ عضویت: ${created_at}</label>
+      <label><b>شناسه کاربری:</b> ${id}</label>
+    </div>
+    <div class="form-group">
+      <label><b>تاریخ عضویت:</b> ${created_at}</label>
     </div>
   </form>
   `;
