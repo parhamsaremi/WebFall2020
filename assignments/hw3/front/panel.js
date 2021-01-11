@@ -29,6 +29,24 @@ function checkToken() {
     });
   } else {
     console.log(token);
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4) {
+        if (this.status != 200) {
+          let message = xhttp.response.message;
+          if (message === "invalid token") {
+            Swal.fire("شما اجازه‌ی دسترسی به این صفحه را ندارید").then(() => {
+              window.location.replace("./register.html");
+            });
+          }
+        }
+      }
+    };
+
+    xhttp.open("GET", "http://localhost:3000/api/admin/verify/crud", true);
+    xhttp.setRequestHeader("authorization", token);
+    xhttp.responseType = "json";
+    xhttp.send();
   }
 }
 
@@ -323,10 +341,17 @@ function loadInfoPage() {
   let token = window.localStorage.getItem("token");
   let xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      const { user } = this.response;
-      let temp = userDetailHTML(user.created_at, user.id, user.email);
-      document.getElementById("dataTable").innerHTML = temp;
+    if (this.readyState == 4) {
+      if (this.status == 200) {
+        const { user } = this.response;
+        let temp = userDetailHTML(user.created_at, user.id, user.email);
+        document.getElementById("dataTable").innerHTML = temp;
+      }
+      if (this.status != 200) {
+        Swal.fire("شما اجازه‌ی دسترسی به این صفحه را ندارید").then(() => {
+          window.location.replace("./register.html");
+        });
+      }
     }
   };
 

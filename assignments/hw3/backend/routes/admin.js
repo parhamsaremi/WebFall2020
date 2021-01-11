@@ -150,4 +150,8 @@ router.get('/post/crud/:id?', async (req, res) => {
     }
 });
 
+router.get('/verify/crud', async (req, res) => {
+    return res.status(200).send({ message: 'user verified' })
+});
+
 module.exports = router
