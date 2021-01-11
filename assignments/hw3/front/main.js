@@ -59,7 +59,7 @@ fillGrid = function () {
   //
   let template = "";
   for (let i = 0; i < 20; i++) {
-    template += `<span class="post" style="width: auto; min-width: 150px">
+    template += `<span class="card" style="width: auto; min-width: 150px">
     <img class="card-img-top" src="./assets/multi_logo_200x200.png" alt="Card image cap">
     <div class="card-body">
       <p class="card-text">کارت ${i + 1}</p>
