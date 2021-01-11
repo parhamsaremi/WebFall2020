@@ -87,7 +87,6 @@ fillPosts = () => {
       showPostList();
     }
   };
-  // todo check url
   xhttp.open("GET", "http://localhost:3000/api/post/", true);
   xhttp.send();
 };
@@ -102,8 +101,8 @@ function showPostList() {
                     <h5 class="card-title">${post.title}</h5>
                     <p class="card-text">${post.content}</p>
                     </div>
-                    <div class="card-header">${post.created_by}</div>
-                    <div class="card-header">${post.created_at}</div>
+                    <div class="card-header">نویسنده: ${post.created_by}</div>
+                    <div class="card-header">تاریخ ساخت: ${post.created_at}</div>
                     </div>`;
   }
   document.getElementById("dataTable").innerHTML = "";

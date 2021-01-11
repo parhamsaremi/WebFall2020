@@ -52,7 +52,7 @@ function getAddCard() {
 }
 function getInfoCard(date, title, content, id) {
   return `<span class="card post border-light mb-3" style="min-width: 150px; min-height:350px;" id = "post-${id}">
-  <div class="card-header">${date}</div>
+  <div class="card-header">تاریخ ساخت: ${date}</div>
   <div class="card-body" style="position: relative;">
     <h5 class="card-title">${title}</h5>
     <p class="card-text">${content}</p>
@@ -272,16 +272,20 @@ function getPostsAdmin() {
   let token = window.localStorage.getItem("token");
   let xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
-    let message = xhttp.response.message;
-    if (message === "invalid token") {
-      Swal.fire("شما اجازه‌ی دسترسی به این صفحه را ندارید").then(() => {
-        window.location.replace("./register.html");
-      });
-    }
-    if (this.readyState == 4 && this.status == 200) {
-      const { posts } = this.response;
-      post_list = posts
-      showPostList()
+    if (this.readyState == 4) {
+      if (this.status != 200) {
+        let message = xhttp.response.message;
+        if (message === "invalid token") {
+          Swal.fire("شما اجازه‌ی دسترسی به این صفحه را ندارید").then(() => {
+            window.location.replace("./register.html");
+          });
+        }
+      }
+      if (this.status == 200) {
+        const { posts } = this.response;
+        post_list = posts
+        showPostList()
+      }
     }
   };
 
@@ -291,19 +295,19 @@ function getPostsAdmin() {
   xhttp.send();
 }
 
-function showPostList(){
+function showPostList() {
   let template = ``
-      for (let i = 0; i < post_list.length; i++) {
-        let post = post_list[i];
-        template += getInfoCard(
-          post.created_at,
-          post.title,
-          post.content,
-          post.id
-        );
-      }
-      template += getAddCard()
-      document.getElementById("dataGrid").innerHTML = template;
+  for (let i = 0; i < post_list.length; i++) {
+    let post = post_list[i];
+    template += getInfoCard(
+      post.created_at,
+      post.title,
+      post.content,
+      post.id
+    );
+  }
+  template += getAddCard()
+  document.getElementById("dataGrid").innerHTML = template;
 }
 
 function loadInfoPage() {
@@ -336,13 +340,13 @@ function userDetailHTML(created_at, id, email) {
   return `
     <form>
     <div class="form-group">
-      <label>Email address: ${email}</label>
+      <label>ایمیل: ${email}</label>
     </div>
     <div class="form-group">
-      <label>id: ${id}</label>
+      <label>شناسه کاربری: ${id}</label>
     </div>
     <div class="form-group">
-      <label>Created at: ${created_at}</label>
+      <label>تاریخ عضویت: ${created_at}</label>
     </div>
   </form>
   `;

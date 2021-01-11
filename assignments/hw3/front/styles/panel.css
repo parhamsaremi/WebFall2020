@@ -397,3 +397,7 @@ body.dark-mode #bottom-navbar > div > ul > li:hover {
     width: 300px;
   }
 }
+
+.card-header, .card-title, .card-text{
+  text-align: right;
+}
