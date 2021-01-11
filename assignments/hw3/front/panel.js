@@ -3,7 +3,7 @@ let posts_start = 0
 let post_list = []
 
 setup = function () {
-  // checkToken();
+  checkToken();
   loadStartingAnimation();
   document
     .getElementById("customSwitches")
@@ -578,6 +578,7 @@ goToRegister = function () {
   let duration = 1500;
   loadEndingAnimation(duration);
   setTimeout(() => {
+    window.localStorage.setItem('token', "")
     window.location.href = "./register.html";
   }, duration + 300);
 };
