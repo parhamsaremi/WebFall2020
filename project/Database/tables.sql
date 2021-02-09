@@ -20,6 +20,7 @@ CREATE TABLE comments (
     user_email  varchar(50),
     prof_id     serial,
     comment     text,
+    confirmed   boolean default false,
     primary key (user_email, prof_id),
     foreign key (user_email) references users (email) on delete cascade,
     foreign key (prof_id) references profs (id) on delete cascade
