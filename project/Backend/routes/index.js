@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const signUpRouter = require('./signup');
+const adminRouter = require('./admin');
 
 authenticate = (req, res, next) => {
     const authHeader = req.headers['authorization']
@@ -20,4 +21,5 @@ authenticate = (req, res, next) => {
 
 module.exports = app => {
     app.use('/api/signup', signUpRouter);
+    app.use('/api/admin', /* authenticate, */ adminRouter);
 }

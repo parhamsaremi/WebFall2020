@@ -1,5 +1,5 @@
 const express = require('express');
-// const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const dotenv = require("dotenv");
@@ -10,6 +10,7 @@ const mountRoutes = require('./routes')
 const app = express()
 
 app.use(cors());
+app.use(bodyParser.json())
 
 mountRoutes(app)
 app.use((req, res, next) => {
