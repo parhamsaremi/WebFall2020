@@ -3,17 +3,22 @@ const db = require('../db')
 
 const router = new Router()
 
-router.get('/feedback/:id', async (req, res) => {
+const isNumeric = (value) => /^-?\d+$/.test(value);
+
+router.get('/:id', async (req, res) => {
     const { id: profId } = req.params
 
-    if (!isNum(profId))
+    if (!isNumeric)
         return res.status(400).send({ message: 'prof id is not valid' })
 
-    const { rows: comments } = await db.query("SELECT comment FROM comments WHERE prof_id = $1", [profId])
+    const { rows: comments } = await db.query("SELECT name, comment, created_at FROM "
+        + "comments INNER JOIN users ON comments.user_email = users.email "
+        + "WHERE prof_id = $1", [profId])
+    
     return res.status(200).send({ comments })
 });
 
-router.post('/feedback/:id', async (req, res) => {
+router.post('/:id', async (req, res) => {
     const { id: profId } = req.params
     const { comment } = req.body;
 
