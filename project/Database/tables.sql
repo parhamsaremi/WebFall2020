@@ -1,3 +1,5 @@
+CREATE EXTENSION pgcrypto;
+
 CREATE TABLE users (
     name    varchar(50),
     email   varchar(50),
@@ -21,4 +23,4 @@ CREATE TABLE comments (
     primary key (user_email, prof_id),
     foreign key (user_email) references users (email) on delete cascade,
     foreign key (prof_id) references profs (id) on delete cascade
-)
+);
