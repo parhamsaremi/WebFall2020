@@ -21,6 +21,7 @@ CREATE TABLE comments (
     prof_id     serial,
     comment     text,
     confirmed   boolean default false,
+    created_at  varchar(10),
     primary key (user_email, prof_id),
     foreign key (user_email) references users (email) on delete cascade,
     foreign key (prof_id) references profs (id) on delete cascade
