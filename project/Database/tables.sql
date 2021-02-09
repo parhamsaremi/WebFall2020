@@ -1,8 +1,8 @@
 CREATE EXTENSION pgcrypto;
 
 CREATE TABLE users (
-    name    varchar(50),
-    email   varchar(50),
+    name        varchar(50),
+    email       varchar(50),
     password    text not null,
     primary key (email)
 );
