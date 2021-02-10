@@ -70,4 +70,11 @@ router.delete('/users', async (req, res) => {
     return res.sendStatus(204)
 });
 
+/** TODO
+ * add a professor
+ */
+router.post('/profs', async (req, res) => {
+    return res.sendStatus(404)
+});
+
 module.exports = router

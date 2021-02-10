@@ -5,6 +5,9 @@ const router = new Router()
 
 const isNumeric = (value) => /^-?\d+$/.test(value);
 
+/**
+ * get comments related to the prof with the given id
+ */
 router.get('/:id', async (req, res) => {
     const { id: profId } = req.params
 
@@ -18,6 +21,9 @@ router.get('/:id', async (req, res) => {
     return res.status(200).send({ comments })
 });
 
+/**
+ * post a feedback
+ */
 router.post('/:id', async (req, res) => {
     const { id: profId } = req.params
     const { comment } = req.body;
