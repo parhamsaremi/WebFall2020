@@ -16,20 +16,6 @@ router.get('/unconfirmed', async (req, res) => {
 });
 
 /**
- * deletes the comment with given id
- */
-router.delete('/feedback/:id', async (req, res) => {
-    const { id: commentId } = req.params
-    
-    if (!isNumeric(commentId))
-        return res.status(400).send({ message: 'comment id is not valid' })
-
-    await db.query("DELETE FROM comments WHERE id = $1", [commentId]);
-
-    return res.sendStatus(204);
-});
-
-/**
  * if id is given, that comment will be confirmed,
  * else, all of them will be confirmed.
  */
@@ -54,6 +40,20 @@ router.get('/users', async (req, res) => {
     const { rows: users } = await db.query("SELECT name, email FROM users")
 
     return res.status(200).send({ users })
+});
+
+/**
+ * deletes the comment with given id
+ */
+router.delete('/feedback/:id', async (req, res) => {
+    const { id: commentId } = req.params
+    
+    if (!isNumeric(commentId))
+        return res.status(400).send({ message: 'comment id is not valid' })
+
+    await db.query("DELETE FROM comments WHERE id = $1", [commentId]);
+
+    return res.sendStatus(204);
 });
 
 /**
