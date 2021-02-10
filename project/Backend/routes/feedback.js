@@ -8,7 +8,7 @@ const isNumeric = (value) => /^-?\d+$/.test(value);
 router.get('/:id', async (req, res) => {
     const { id: profId } = req.params
 
-    if (!isNumeric)
+    if (!isNumeric(profId))
         return res.status(400).send({ message: 'prof id is not valid' })
 
     const { rows: comments } = await db.query("SELECT name, comment, created_at FROM "
