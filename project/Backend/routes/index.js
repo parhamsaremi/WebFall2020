@@ -4,6 +4,7 @@ const signUpRouter = require('./signup');
 const feedbackRouter = require('./feedback');
 const adminRouter = require('./admin');
 const profRouter = require('./profs');
+const signInRouter = require('./signin');
 
 authenticate = (req, res, next) => {
     const authHeader = req.headers['authorization']
@@ -21,9 +22,16 @@ authenticate = (req, res, next) => {
     })
 }
 
+adminAuth = (req, res, next) => {
+    if (req.user.isAdmin)
+        next()
+    return res.status(401).send({message: 'not authorized as admin'})
+}
+
 module.exports = app => {
     app.use('/api/signup', signUpRouter);
-    app.use('/api/feedback', /* authenticate, */ feedbackRouter);
-    app.use('/api/admin', /* authenticate, */ adminRouter);
+    app.use('/api/feedback', authenticate, feedbackRouter);
+    app.use('/api/admin', authenticate, adminAuth, adminRouter);
     app.use('/api/profs', profRouter);
+    app.use('/api/signin', signInRouter);
 }
