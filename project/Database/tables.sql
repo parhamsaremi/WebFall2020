@@ -26,3 +26,9 @@ CREATE TABLE comments (
     foreign key (user_email) references users (email) on delete cascade,
     foreign key (prof_id) references profs (id) on delete cascade
 );
+
+CREATE TABLE admins (
+    username    varchar(30),
+    password    text,
+    primary key (username)
+);
