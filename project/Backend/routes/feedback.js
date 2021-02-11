@@ -1,25 +1,28 @@
 const Router = require('express-promise-router')
+const { param, validationResult } = require('express-validator')
+
 const db = require('../db')
 
 const router = new Router()
 
-const isNumeric = (value) => /^-?\d+$/.test(value);
-
 /**
  * get comments related to the prof with the given id
  */
-router.get('/:id', async (req, res) => {
-    const { id: profId } = req.params
+router.get('/:id',
+    param('id').isInt(),
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty())
+            return res.status(400).json({ errors: errors.array() });
 
-    if (!isNumeric(profId))
-        return res.status(400).send({ message: 'prof id is not valid' })
+        const { id: profId } = req.params
 
-    const { rows: comments } = await db.query("SELECT name, comment, created_at FROM "
-        + "comments INNER JOIN users ON comments.user_email = users.email "
-        + "WHERE prof_id = $1", [profId])
-    
-    return res.status(200).send({ comments })
-});
+        const { rows: comments } = await db.query("SELECT name, comment, created_at FROM "
+            + "comments INNER JOIN users ON comments.user_email = users.email "
+            + "WHERE prof_id = $1", [profId])
+
+        return res.status(200).send({ comments })
+    });
 
 /**
  * post a feedback
