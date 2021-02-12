@@ -25,17 +25,19 @@ authenticate = (req, res, next) => {
     })
 }
 
-sqlInjectionCheck = (req, res, next) => {
-    /** check:
-     *      req.params
-     *      req.query
-     *      req.body
-     */
+inputCheck = (req, res, next) => {
+    const input = [].concat(Object.values(req.params)).concat(Object.values(req.query)).concat(Object.values(req.body))
+    const illegalTerms = [' union ', '--', ';', '<', '&', '>']
+    for (let item of input)
+        for (let term of illegalTerms)
+            if (item.includes(term))
+                return res.status(400).send({message: 'input contains illegal chars or terms'})
+    
     next()
 }
 
 module.exports = app => {
-    app.use(sqlInjectionCheck)
+    app.use(inputCheck)
     app.use('/api/signup', signUpRouter);
     app.use('/api/feedback', authenticate, feedbackRouter);
     app.use('/api/admin', authenticate, adminRouter);
