@@ -6,7 +6,7 @@ const router = new Router()
 const isNumeric = (value) => /^-?\d+$/.test(value);
 
 /**
- * returns the comments which are not confirmed/declined yet
+ * returns the comments which are not confirmed/rejected yet
  */
 router.get('/unconfirmed', async (req, res) => {
 
