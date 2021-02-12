@@ -17,15 +17,12 @@ authenticate = (req, res, next) => {
         if (err)
             return res.status(401).send({message: 'invalid token'})
 
+        if (req.url.includes('admin') && !user.isAdmin)
+            return res.status(401).send({message: 'not authorized as admin'})
+
         req.user = user
         next()
     })
-}
-
-adminAuth = (req, res, next) => {
-    if (req.user.isAdmin)
-        next()
-    return res.status(401).send({message: 'not authorized as admin'})
 }
 
 sqlInjectionCheck = (req, res, next) => {
@@ -41,7 +38,7 @@ module.exports = app => {
     app.use(sqlInjectionCheck)
     app.use('/api/signup', signUpRouter);
     app.use('/api/feedback', authenticate, feedbackRouter);
-    app.use('/api/admin', authenticate, adminAuth, adminRouter);
+    app.use('/api/admin', authenticate, adminRouter);
     app.use('/api/profs', profRouter);
     app.use('/api/signin', signInRouter);
 }
