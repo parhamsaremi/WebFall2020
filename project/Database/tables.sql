@@ -12,7 +12,8 @@ CREATE TABLE profs (
     fa_name     varchar(50),
     en_name     varchar(50),
     image_path  varchar(60),
-    primary key (en_name)
+    uni         varchar(50),
+    primary key (en_name, uni)
 );
 
 CREATE TABLE comments (
@@ -31,4 +32,10 @@ CREATE TABLE admins (
     username    varchar(30),
     password    text,
     primary key (username)
+);
+
+CREATE TABLE requests (
+    name    varchar(50),
+    uni     varchar(50),
+    description     text
 );
