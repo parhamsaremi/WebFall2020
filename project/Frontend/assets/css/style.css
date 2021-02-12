@@ -166,7 +166,7 @@ h1, h2, h3, h4, h5, h6 {
   background: rgba(255, 255, 255, 0.2);
 }
 
-#contactBtn.active{
+#contactBtn .active{
   background: rgba(255, 255, 255, 0.2)!important; 
 }
 
