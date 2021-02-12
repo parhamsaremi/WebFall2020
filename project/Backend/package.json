@@ -16,6 +16,7 @@
     "elasticsearch": "^16.7.2",
     "express": "^4.17.1",
     "express-promise-router": "^4.0.1",
+    "express-validator": "^6.9.2",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.5.1"
   }
