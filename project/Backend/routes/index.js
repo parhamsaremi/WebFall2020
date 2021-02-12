@@ -28,7 +28,17 @@ adminAuth = (req, res, next) => {
     return res.status(401).send({message: 'not authorized as admin'})
 }
 
+sqlInjectionCheck = (req, res, next) => {
+    /** check:
+     *      req.params
+     *      req.query
+     *      req.body
+     */
+    next()
+}
+
 module.exports = app => {
+    app.use(sqlInjectionCheck)
     app.use('/api/signup', signUpRouter);
     app.use('/api/feedback', authenticate, feedbackRouter);
     app.use('/api/admin', authenticate, adminAuth, adminRouter);
