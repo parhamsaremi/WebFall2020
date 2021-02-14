@@ -1,0 +1,4 @@
+CREATE TRIGGER CALC_AVG
+    AFTER INSERT ON profs
+    FOR EACH ROW
+    EXECUTE PROCEDURE add_prof_to_rating();
