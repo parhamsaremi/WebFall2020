@@ -1,5 +1,5 @@
 load = function(){
-    showHome()
+    // showHome()
 }
 
 showHome = function(){

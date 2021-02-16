@@ -27,13 +27,6 @@
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
 
-  <!-- for navbar -->
-  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-		
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="nav/css/style.css">
-
-
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
   <!-- Google Fonts -->
@@ -65,9 +58,8 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a id="homeBtn" class="nav-link scrollto selected active" href="#hero" onclick="showHome()">Home</a></li>
+          <li><a id="homeBtn" class="nav-link scrollto selected active" href="./index.html/#hero" onclick="showHome()">Home</a></li>
           <li><a id="loginBtn" class="nav-link scrollto" href="#hero" onclick="showLogin()">Login/SignUp</a></li>
-          <li><a id="contactBtn" class="nav-link scrollto" href="#contact">Contact</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -77,7 +69,7 @@
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" style="min-height: 700px;">
-    <div id="welcomPage" class="hero-container" data-aos="fade-up" style="display: none;">
+    <div id="welcomPage" class="hero-container" data-aos="fade-up" style="display: flex;">
       <h1>Welcome to Ostad Sanj</h1>
       <div class="input-group justify-content-center">
         <div class="form-outline">
@@ -122,103 +114,6 @@
               <input type="submit" class="btnSubmit" value="Sign Up" />
             </div>
           </form>
-        </div>
-      </div>
-    </div>
-
-
-
-    <div id="teacher_container">
-      <nav id="sidebar" style="height: 100%; background-color: black; position: absolute;">
-        
-        <div class="img bg-wrap text-center py-4" style="background-image: url(nav/images/bg_1.jpg);">
-          <div class="user-logo">
-            <div class="img" style="background-image: url(nav/images/logo.jpg);"></div>
-            <h3>Catriona Henderson</h3>
-          </div>
-        </div>
-        <ul class="list-unstyled components mb-5">
-          <li class="active">
-            <a href="#"><span class="fa fa-home mr-3"></span> Home</a>
-          </li>
-          <li>
-            <a href="#"><span class="fa fa-download mr-3 notif"><small
-                  class="d-flex align-items-center justify-content-center">5</small></span> Download</a>
-          </li>
-          <li>
-            <a href="#"><span class="fa fa-gift mr-3"></span> Gift Code</a>
-          </li>
-          <li>
-            <a href="#"><span class="fa fa-trophy mr-3"></span> Top Review</a>
-          </li>
-          <li>
-            <a href="#"><span class="fa fa-cog mr-3"></span> Settings</a>
-          </li>
-          <li>
-            <a href="#"><span class="fa fa-support mr-3"></span> Support</a>
-          </li>
-          <li>
-            <a href="#"><span class="fa fa-sign-out mr-3"></span> Sign Out</a>
-          </li>
-        </ul>
-
-      </nav>
-      <div id="info" class="row">
-        <div id="comments">
-          <!-- Comments -->
-
-          <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-            integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-          <!--<div class="container">
-            <div class="row">
-              <div class="col-md-8">
-                <div class="media g-mb-30 media-comment">
-                  <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
-                    <div class="g-mb-15">
-                      <h5 class="h5 g-color-gray-dark-v1 mb-0">John Doe</h5>
-                      <span class="g-color-gray-dark-v4 g-font-size-12">5 days ago</span>
-                    </div>
-
-                    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras
-                      purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
-                      vulputate fringilla. Donec lacinia congue
-                      felis in faucibus ras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-
-                    <ul class="list-inline d-sm-flex my-0">
-                      <li class="list-inline-item g-mr-20">
-                        <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
-                          <i class="fa fa-thumbs-up g-pos-rel g-top-1 g-mr-3"></i>
-                          178
-                        </a>
-                      </li>
-                      <li class="list-inline-item g-mr-20">
-                        <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
-                          <i class="fa fa-thumbs-down g-pos-rel g-top-1 g-mr-3"></i>
-                          34
-                        </a>
-                      </li>
-                      <li class="list-inline-item ml-auto">
-                        <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
-                          <i class="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i>
-                          Reply
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              
-            </div>
-
-          </div>
-        -->
-
-
-
-
-
-
         </div>
       </div>
     </div>
@@ -300,7 +195,7 @@
       class="bi bi-arrow-up-short"></i></a>
 
   <script src="index.js"></script>
-
+    
   <!-- Vendor JS Files -->
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -309,11 +204,6 @@
   <script src="assets/vendor/php-email-form/validate.js"></script>
   <script src="assets/vendor/purecounter/purecounter.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-
-  <script src="nav/js/jquery.min.js"></script>
-    <script src="nav/js/popper.js"></script>
-    <script src="nav/js/bootstrap.min.js"></script>
-    <script src="nav/js/main.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
