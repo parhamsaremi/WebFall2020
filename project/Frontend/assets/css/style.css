@@ -1505,16 +1505,25 @@ body {
 
 #teacher_container {
   margin-top: 5%;
-  min-height: 1000px;
+  min-height: 600px;
+  display: flex;
+  position: relative;
   max-width: 65%;
-  background-color: rgba(49, 66, 223, 0.87);
+  background-color: rgba(61, 81, 255, 0.897);
   margin-left: 17.5%;
 }
 
-#teacher {
-  height: 100%;
-  position: absolute;
-  width: 10%;
+#sidebar {
+  position: relative;
+  display: block; 
+  overflow: auto;
+  width: 50%;
   max-width: 10%;
-  background-color: rgb(16, 19, 184);
+  background-color: rgb(15, 0, 97);
+}
+
+#info {
+  background-color: yellow;
+  width: 65%;
+  margin:5% 5% 5% 5%;
 }
