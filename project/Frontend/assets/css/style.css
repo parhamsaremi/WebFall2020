@@ -5,11 +5,38 @@
 * License: https://bootstrapmade.com/license/
 */
 
+/* Fonts */
+@font-face {
+  font-family: Sahel;
+  src: url('https://cdn.fontcdn.ir/Font/Persian/Sahel/Sahel-Black.eot');
+  src: url('https://cdn.fontcdn.ir/Font/Persian/Sahel/Sahel-Black.eot?#iefix') format('embedded-opentype'),
+      url('https://cdn.fontcdn.ir/Font/Persian/Sahel/Sahel-Black.woff') format('woff'),
+      url('https://cdn.fontcdn.ir/Font/Persian/Sahel/Sahel-Black.ttf') format('truetype');
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: Yekan;
+  src: url("../assets/yekan.eot");
+  src: url("../assets/yekan.eot?#iefix") format("embedded-opentype"),
+      url("../assets/yekan.woff") format("woff"),
+      url("../assets/yekan.ttf") format("truetype");
+  font-weight: normal;
+  unicode-range: U+30-39;
+}
+/*********/
+
+/* Our Custom styles */
+.navbar {
+  font-family: Yekan, Sahel, 'Samim', Shabnam, 'Courier New', Courier, monospace !important;
+}
+/**********/
+
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: Sahel, "Open Sans", sans-serif;
   color: #444444;
 }
 
@@ -29,7 +56,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Raleway", sans-serif;
+  font-family: Sahel, "Raleway", sans-serif;
 }
 
 #main {
