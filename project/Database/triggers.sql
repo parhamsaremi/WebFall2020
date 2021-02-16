@@ -1,0 +1,9 @@
+CREATE TRIGGER ADD_PROF
+    AFTER INSERT ON profs
+    FOR EACH ROW
+    EXECUTE PROCEDURE add_prof_to_rating();
+
+CREATE TRIGGER CALC_AVG
+    AFTER INSERT ON comments
+    FOR EACH ROW
+    EXECUTE PROCEDURE calc_prof_avg();

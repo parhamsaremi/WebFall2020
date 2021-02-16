@@ -16,8 +16,8 @@ router.post('/:id', async (req, res) => {
     // TODO add other fields
     // TODO if comment === '' then set confirmed = true
 
-    await db.query("INSERT INTO comments (comment, prof_id, user_email, created_at) "
-        + "VALUES ($1, $2, $3, current_date)", [comment, profId, req.user.email]);
+    await db.query("INSERT INTO comments (comment, prof_id, user_email) "
+        + "VALUES ($1, $2, $3)", [comment, profId, req.user.email]);
 
     return res.sendStatus(204);
 });

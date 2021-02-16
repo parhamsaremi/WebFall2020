@@ -71,7 +71,7 @@ router.delete('/users', async (req, res) => {
 });
 
 /** TODO
- * add a professor
+ * add a professor getting name and uni and image
  */
 router.post('/profs', async (req, res) => {
     return res.sendStatus(404)
