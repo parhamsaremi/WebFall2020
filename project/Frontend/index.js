@@ -1,5 +1,6 @@
 load = function(){
     // showHome()
+    fillChart()
 }
 
 showHome = function(){
@@ -20,4 +21,32 @@ showLogin = function(){
     document.getElementById("welcomPage").style.display = "none"
     document.getElementById("loginPage").style.display = "block"
 
+}
+
+fillChart= function(){
+
+}
+
+teacherHome = function(){
+    document.getElementById("tHome").classList.add("active")
+    document.getElementById("tComments").classList.remove("active")
+    document.getElementById("tCharts").classList.remove("active")
+    document.getElementById("overview").style.display="block"
+    document.getElementById("comments").style.display= "none"
+
+}
+
+teacherComments = function(){
+    document.getElementById("tComments").classList.add("active")
+    document.getElementById("tHome").classList.remove("active")
+    document.getElementById("tCharts").classList.remove("active")
+    document.getElementById("comments").style.display= "block"
+    document.getElementById("overview").style.display="none"
+
+}
+
+teacherCharts = function(){
+    document.getElementById("tCharts").classList.add("active")
+    document.getElementById("tComments").classList.remove("active")
+    document.getElementById("tHome").classList.remove("active")
 }
