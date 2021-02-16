@@ -70,10 +70,13 @@ router.get('/ratings/:id',
             return res.status(400).send({ message: "profId isn't correct" })
 
         // TODO add columns to replace * with their avg and count in the following query
-        const { rows: info } = await db.query("SELECT * FROM comments "
+        const { rows: comments } = await db.query("SELECT * FROM comments "
             + "WHERE PROF_ID = $1 AND CONFIRMED = TRUE", [profId])
 
-        return res.status(200).send({ info })
+        const { rows: ratingsRows } = await db.query("SELECT * FROM ratings "
+            + "WHERE PROF_ID = $1", [profId])
+
+        return res.status(200).send({ comments, ratings: ratingsRows[0] })
     });
 
 /**
