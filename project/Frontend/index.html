@@ -67,7 +67,6 @@
         <ul>
           <li><a id="homeBtn" class="nav-link scrollto selected active" href="#hero" onclick="showHome()">Home</a></li>
           <li><a id="loginBtn" class="nav-link scrollto" href="#hero" onclick="showLogin()">Login/SignUp</a></li>
-          <li><a id="contactBtn" class="nav-link scrollto" href="#contact">Contact</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -77,14 +76,14 @@
 
   <!-- ======= Hero Section ======= -->
   <section id="hero">
-    <div id="welcomPage" class="hero-container" data-aos="fade-up" style="display: none;">
+    <div id="welcomePage" class="hero-container" data-aos="fade-up" style="display: flex;">
       <h1>Welcome to Ostad Sanj</h1>
       <div class="input-group justify-content-center">
         <div class="form-outline">
           <input type="search" id="form1" class="form-control" style="background-color: aliceblue;" />
           <label class="form-label" for="form1" style="color: black">Search</label>
         </div>
-        <button type="button" class="btn btn-primary">
+        <button id="searchBtn" type="button" class="btn btn-primary" onclick="search()">
           <i class="fas fa-search"></i>
         </button>
       </div>
@@ -128,7 +127,7 @@
 
 
 
-    <div id="teacher_container">
+    <div id="teacher_container" style="display: none;">
       <nav id="sidebar">
         
         <div class="img bg-wrap text-center py-4" style="background-image: url(nav/images/bg_1.jpg);">
