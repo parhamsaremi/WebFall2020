@@ -27,10 +27,8 @@ showLogin = function () {
 }
 
 teacherHome = function () {
-    // document.getElementById("tHome").classList.add("active")
     document.getElementById("tComments").classList.remove("active")
     document.getElementById("tCharts").classList.remove("active")
-    // document.getElementById("overview").style.display = "block"
     document.getElementById("comments").style.display = "none"
     document.getElementById("charts").style.display = "none"
 }
@@ -38,19 +36,15 @@ teacherHome = function () {
 teacherComments = function () {
     fetchComments(1); // TODO replace with prof id
 
-    // document.getElementById("tHome").classList.remove("active")
     document.getElementById("tComments").classList.add("active")
     document.getElementById("tCharts").classList.remove("active")
-    // document.getElementById("overview").style.display = "none"
     document.getElementById("comments").style.display = "block"
     document.getElementById("charts").style.display = "none"
 }
 
 teacherCharts = function () {
-    // document.getElementById("tHome").classList.remove("active")
     document.getElementById("tComments").classList.remove("active")
     document.getElementById("tCharts").classList.add("active")
-    // document.getElementById("overview").style.display = "none"
     document.getElementById("comments").style.display = "none"
     document.getElementById("charts").style.display = "block"
 

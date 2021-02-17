@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>استاد سنج</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+
+  <!-- for navbar -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="nav/css/style.css">
+
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+  <!-- MDB -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.css" rel="stylesheet" />
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  <!-- canvasjs source code -->
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <!-- sweetalert source code -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+  <!-- =======================================================
+  * Template Name: Squadfree - v4.0.0
+  * Template URL: https://bootstrapmade.com/squadfree-free-bootstrap-template-creative/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body dir="rtl" onload="load()" style="overflow: none!important;">
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top header-transparent">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <div class="logo">
+        <h1 class="text-light"><a style="font-family: system-ui;" href="panel.html"><span>استاد سنج</span></a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a id="homeBtn" class="nav-link scrollto selected active" style="font-family: system-ui;" href="#hero"
+              onclick="showHome()">خانه</a></li>
+          <li><a id="panelBtn" class="nav-link scrollto" style="font-family: system-ui;" href="#hero"
+              onclick="showPanel()">حساب کاربری</a></li>
+          <li><a id="logoutBtn" class="nav-link scrollto" style="font-family: system-ui;" href="#hero"
+              onclick="logout()">خروج</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div id="welcomePage" class="hero-container" data-aos="fade-up" style="display: flex;">
+      <h1>پرهام این اسم یکم چرته</h1><br /><br />
+      <div class="input-group justify-content-center">
+        <div class="form-outline">
+          <input type="search" id="form1" class="form-control" onkeyup="checkForEnter(event)"
+            style="background-color: aliceblue; width: 250px; margin-top: -1px; border-radius: 0.5rem;" />
+          <label class="form-label" for="form1" style="color: black">جستجوی استاد</label>
+        </div>
+        <button id="searchBtn" type="button" class="btn btn-primary" onclick="search()"
+          style="height: 40px;border-radius: 0.5rem;">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </div>
+
+    <div id="user_container" style="display: none;">
+      <nav id="sidebar">
+        <ul class="list-unstyled components mb-5">
+          <li id="tComment" class="active" onclick="fetchComments()">
+            <a href="#"><span class="bi bi-receipt mr-3"></span> نظرات من </a>
+          </li>
+        </ul>
+
+      </nav>
+      <div id="info">
+        <!-- Comments -->
+        <!-- TODO fix scroll -->
+        <div id="comments" style="display: block;">
+          <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+            integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+        </div>
+
+        <!-- new Professor -->
+
+      </div>
+    </div>
+
+
+
+  </section><!-- End Hero -->
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <script src="panel.js"></script>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/purecounter/purecounter.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <script src="nav/js/jquery.min.js"></script>
+  <script src="nav/js/popper.js"></script>
+  <script src="nav/js/bootstrap.min.js"></script>
+  <script src="nav/js/main.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+
+  <!-- for login form -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
+    id="bootstrap-css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+
+</html>
