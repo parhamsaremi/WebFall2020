@@ -10,7 +10,9 @@ const isNumeric = (value) => /^-?\d+$/.test(value);
  */
 router.get('/unconfirmed', async (req, res) => {
 
-    const { rows: comments } = await db.query("SELECT id, comment FROM comments WHERE confirmed = FALSE")
+    const { rows: comments } = await db.query("SELECT id, name, comment FROM "
+      + "comments INNER JOIN users ON comments.user_email = users.email "
+      + "WHERE confirmed = FALSE")
 
     return res.status(200).send({ comments })
 });
