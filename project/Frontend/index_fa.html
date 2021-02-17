@@ -79,7 +79,8 @@
       <h1>پرهام این اسم یکم چرته</h1><br /><br />
       <div class="input-group justify-content-center">
         <div class="form-outline">
-          <input type="search" id="form1" class="form-control" style="background-color: aliceblue; width: 250px; margin-top: -1px;" />
+          <input type="search" id="form1" class="form-control" onkeyup="checkForEnter(event)"
+            style="background-color: aliceblue; width: 250px; margin-top: -1px;" />
           <label class="form-label" for="form1" style="color: black">جستجوی استاد</label>
         </div>
         <button id="searchBtn" type="button" class="btn btn-primary" onclick="search()" style="height: 40px;border-radius: 0.5rem;">
