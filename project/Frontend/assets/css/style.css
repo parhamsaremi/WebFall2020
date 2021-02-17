@@ -1443,15 +1443,7 @@ section {
   text-align: center;
   color: #333;
 }
-.login-form-2 {
-  padding: 5%;
-  background: #0062cc;
-  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
-}
-.login-form-2 h3 {
-  text-align: center;
-  color: #fff;
-}
+
 .login-container form {
   padding: 10%;
 }
@@ -1554,7 +1546,6 @@ body {
 }
 
 #comments {
-  background-color: rgba(61, 81, 255, 0.897);
   height: 470px;
   overflow-y: auto;
 }
@@ -1582,4 +1573,17 @@ body {
   height: 310px;
   margin:80px 10px 80px 10px;
   max-width: 185px!important;
+}
+
+
+
+
+#admin_container {
+  margin-top: 5%;
+  min-height: 600px;
+  display: flex;
+  position: relative;
+  max-width: 65%;
+  background-color: rgba(61, 81, 255, 0.897);
+  margin-left: 17.5%;
 }
