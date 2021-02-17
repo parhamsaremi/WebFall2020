@@ -41,28 +41,40 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.css" rel="stylesheet" />
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <!-- canvasjs source code -->
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <!-- sweetalert source code -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
   <!-- =======================================================
   * Template Name: Squadfree - v4.0.0
   * Template URL: https://bootstrapmade.com/squadfree-free-bootstrap-template-creative/
-  * Author: Bootstr apMade.com
+  * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
 
-<body onload="init()" dir="rtl" style="overflow: none!important;">
+<body dir="rtl" onload="load()" style="overflow: none!important;">
 
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top header-transparent">
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1 class="text-light"><a style="font-family: system-ui;" href="index.html"><span>استادسنج</span></a></h1>
+        <h1 class="text-light"><a style="font-family: system-ui;" href="panel.html"><span>استاد سنج</span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
+        <ul>
+          <li><a id="homeBtn" class="nav-link scrollto selected active" style="font-family: system-ui;" href="#hero"
+              onclick="showHome()">خانه</a></li>
+          <li><a id="panelBtn" class="nav-link scrollto" style="font-family: system-ui;" href="#hero"
+              onclick="showPanel()">حساب کاربری</a></li>
+          <li><a id="logoutBtn" class="nav-link scrollto" style="font-family: system-ui;" href="#hero"
+              onclick="logout()">خروج</a></li>
+        </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
@@ -71,65 +83,26 @@
 
   <!-- ======= Hero Section ======= -->
   <section id="hero">
-
-    <div id="loginPage" class="container login-container" style="display: block;max-width: 30%;">
-      <div class="login-form-1">
-        <h3>ورود مدیر</h3>
-        <form>
-          <div class="form-group">
-            <input type="text" class="form-control" id="username" placeholder="نام کاربری" value="" />
-          </div>
-          <div class="form-group">
-            <input type="password" class="form-control" id="password" placeholder="رمز عبور" value="" />
-          </div>
-          <div class="form-group">
-            <input type="button" class="btn btnSubmit" value="ورود" onclick="login()" />
-          </div>
-        </form>
+    <div id="welcomePage" class="hero-container" data-aos="fade-up" style="display: flex;">
+      <h1>پرهام این اسم یکم چرته</h1><br /><br />
+      <div class="input-group justify-content-center">
+        <div class="form-outline">
+          <input type="search" id="form1" class="form-control" onkeyup="checkForEnter(event)"
+            style="background-color: aliceblue; width: 250px; margin-top: -1px; border-radius: 0.5rem;" />
+          <label class="form-label" for="form1" style="color: black">جستجوی استاد</label>
+        </div>
+        <button id="searchBtn" type="button" class="btn btn-primary" onclick="search()"
+          style="height: 40px;border-radius: 0.5rem;">
+          <i class="fas fa-search"></i>
+        </button>
       </div>
     </div>
 
-
-    <div id="newProfPanel" class="container login-container" style="display: none;max-width: 30%;">
-      <div class="login-form-1">
-        <h3>افزودن استاد</h3>
-        <form>
-          <div class="form-group">
-            <input type="text" class="form-control" id="faName" placeholder="نام *" value="" />
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" id="enName" placeholder="نام انگلیسی *" value="" />
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" id="imagePath" placeholder="لینک عکس" value="" />
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" id="uni" placeholder="دانشگاه *" value="" />
-          </div>
-          <div class="form-group">
-            <input type="button" class="btn btn-success" value="اضافه" onclick="addProf()"
-              style="min-width: 42%;" />
-            <input type="button" class="btn btn-danger" value="انصراف" onclick="cancelProf()"
-              style="min-width: 42%;margin-left: 10%;" />
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <div id="admin_container" style="display: none;">
+    <div id="user_container" style="display: none;">
       <nav id="sidebar">
         <ul class="list-unstyled components mb-5">
-          <li id="tComment" class="active" onclick="commentGrid()">
-            <a href="#"><span class="bi bi-receipt mr-3"></span> مدیریت نظرات </a>
-          </li>
-          <li id="tUser" onclick="userGrid()">
-            <a href="#"><span class="fa bi-person mr-3"></span> مدیریت کاربران </a>
-          </li>
-          <li id="tProf" onclick="newProf()">
-            <a href="#"><span class="fa bi-people mr-3"></span> اضافه کردن استاد </a>
-          </li>
-          <li id="tMess" onclick="messagesGrid()">
-            <a href="#"><span class="fa fa-envelope-open-o"></span> پیام‌ها </a>
+          <li id="tComment" class="active" onclick="fetchComments()">
+            <a href="#"><span class="bi bi-receipt mr-3"></span> نظرات من </a>
           </li>
         </ul>
 
@@ -140,18 +113,21 @@
         <div id="comments" style="display: block;">
           <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
             integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
         </div>
+
+        <!-- new Professor -->
+
       </div>
     </div>
 
 
-    <!------ Include the above in your HEAD tag ---------->
 
   </section><!-- End Hero -->
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
       class="bi bi-arrow-up-short"></i></a>
 
-  <script src="admin.js"></script>
+  <script src="panel.js"></script>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/aos/aos.js"></script>
