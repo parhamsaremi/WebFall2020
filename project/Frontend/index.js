@@ -1,3 +1,6 @@
+var email_validator_regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+var pass_validator_regex = /^.+$/
+
 load = function () {
     // showHome()
     // fillChart()
@@ -24,10 +27,10 @@ showLogin = function () {
 }
 
 teacherHome = function () {
-    document.getElementById("tHome").classList.add("active")
+    // document.getElementById("tHome").classList.add("active")
     document.getElementById("tComments").classList.remove("active")
     document.getElementById("tCharts").classList.remove("active")
-    document.getElementById("overview").style.display = "block"
+    // document.getElementById("overview").style.display = "block"
     document.getElementById("comments").style.display = "none"
     document.getElementById("charts").style.display = "none"
 }
@@ -35,19 +38,19 @@ teacherHome = function () {
 teacherComments = function () {
     fetchComments(1); // TODO replace with prof id
 
-    document.getElementById("tHome").classList.remove("active")
+    // document.getElementById("tHome").classList.remove("active")
     document.getElementById("tComments").classList.add("active")
     document.getElementById("tCharts").classList.remove("active")
-    document.getElementById("overview").style.display = "none"
+    // document.getElementById("overview").style.display = "none"
     document.getElementById("comments").style.display = "block"
     document.getElementById("charts").style.display = "none"
 }
 
 teacherCharts = function () {
-    document.getElementById("tHome").classList.remove("active")
+    // document.getElementById("tHome").classList.remove("active")
     document.getElementById("tComments").classList.remove("active")
     document.getElementById("tCharts").classList.add("active")
-    document.getElementById("overview").style.display = "none"
+    // document.getElementById("overview").style.display = "none"
     document.getElementById("comments").style.display = "none"
     document.getElementById("charts").style.display = "block"
 
@@ -94,10 +97,26 @@ login = () => {
         timer: 3000,
         timerProgressBar: true,
         didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
-      })
+    })
+
+    if (!email_validator_regex.test(email)) {
+        Toast.fire({
+            icon: 'error',
+            title: 'فرمت ایمیل ورودی صحیح نیست'
+        })
+        return;
+    }
+
+    if (!pass_validator_regex.test(password)) {
+        Toast.fire({
+            icon: 'error',
+            title: 'رمز عبور نمی‌تواند خالی باشد'
+        })
+    }
+
 
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -105,14 +124,14 @@ login = () => {
             if (this.status === 200) {
                 Toast.fire({
                     icon: 'success',
-                    title: 'Signed in successfully'
-                  })
+                    title: 'ورود با موفقیت انجام شد'
+                })
             }
             if (this.status === 401) {
                 Toast.fire({
                     icon: 'error',
-                    title: 'Sign in unsuccessful'
-                  })
+                    title: 'خطا در ورود به حساب کاربری'
+                })
             }
         }
     };
@@ -135,10 +154,41 @@ signup = () => {
         timer: 3000,
         timerProgressBar: true,
         didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
-      })
+    })
+
+    if (name == '') {
+        Toast.fire({
+            icon: 'error',
+            title: 'نام نمی‌تواند خالی باشد'
+        })
+        return;
+    }
+
+
+    if (!email_validator_regex.test(email)) {
+        Toast.fire({
+            icon: 'error',
+            title: 'فرمت ایمیل ورودی صحیح نیست'
+        })
+        return;
+    }
+
+    if (!pass_validator_regex.test(password)) {
+        Toast.fire({
+            icon: 'error',
+            title: 'رمز عبور نمی‌تواند خالی باشد'
+        })
+    }
+
+    if (password != passwordConfirm) {
+        Toast.fire({
+            icon: 'error',
+            title: 'رمز عبور و تکرار آن باید یکسان باشند'
+        })
+    }
 
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -146,14 +196,14 @@ signup = () => {
             if (this.status === 200) {
                 Toast.fire({
                     icon: 'success',
-                    title: 'Signed in successfully'
-                  })
+                    title: 'ثبت‌نام با موفقیت انجام شد'
+                })
             }
             if (this.status === 401) {
                 Toast.fire({
                     icon: 'error',
-                    title: 'Sign in unsuccessful'
-                  })
+                    title: 'خطا در ثبت‌نام'
+                })
             }
         }
     };
@@ -193,7 +243,7 @@ showComments = (comments) => {
 }
 
 fetchRatings = (profId) => {
-    showCharts({'feature_1':1, 'feature_2':2, 'feature_3': 3, 'feature_4': 4}); // TODO remove this
+    showCharts({ 'feature_1': 1, 'feature_2': 2, 'feature_3': 3, 'feature_4': 4 }); // TODO remove this
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status === 200) {
