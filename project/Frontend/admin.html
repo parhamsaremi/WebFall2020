@@ -50,7 +50,7 @@
   ======================================================== -->
 </head>
 
-<body onload="load()" style="overflow: none!important;">
+<body onload="" style="overflow: none!important;">
 
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top header-transparent">
@@ -83,13 +83,30 @@
             <input type="password" class="form-control" placeholder="Your Password *" value="" />
           </div>
           <div class="form-group">
-            <input type="submit" class="btnSubmit" value="Login" onclick="login()"/>
+            <input type="button" class="btnSubmit" value="Login" onclick="login()"/>
           </div>
         </form>
       </div>
     </div>
 
 
+    <div id="newProfPanel" class="container login-container" style="display: none;max-width: 30%;">
+      <div class="login-form-1">
+        <h3>Add new professor</h3>
+        <form>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Professor name *" value="" />
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Picture link *" value="" />
+          </div>
+          <div class="form-group">
+            <input type="button" class="btnSubmit" value="Login" />
+            <input type="button" value="Reject" />
+          </div>
+        </form>
+      </div>
+    </div>
 
     <div id="admin_container" style="display: none;">
       <nav id="sidebar">
@@ -219,30 +236,12 @@
 
         </div>
 
-
-
-
         <!-- new Professor -->
-        <div id="newProfPanel" class="container login-container" style="display: none;max-width: 30%;">
-          <div class="login-form-1">
-            <h3>Add new professor</h3>
-            <form>
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Professor name *" value="" />
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Picture link *" value="" />
-              </div>
-              <div class="form-group">
-                <input type="submit" class="btnSubmit" value="Login" />
-                <input type="submit" value="Reject" />
-              </div>
-            </form>
-          </div>
-        </div>
 
       </div>
     </div>
+
+
     <!------ Include the above in your HEAD tag ---------->
 
 
