@@ -87,16 +87,32 @@ login = () => {
     let email = document.getElementById('loginEmail').value;
     let password = document.getElementById('loginPass').value;
 
-    // TODO Handle Errors if (sth is wrong) return
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
 
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
             if (this.status === 200) {
-                // login successful
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Signed in successfully'
+                  })
             }
             if (this.status === 401) {
-                // wrong email or password
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Sign in unsuccessful'
+                  })
             }
         }
     };
@@ -112,16 +128,32 @@ signup = () => {
     let password = document.getElementById('signUpPass').value;
     let passwordConfirm = document.getElementById('signUpConfirmPass').value;
 
-    // TODO Handle Input Errors if (sth is wrong) return
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
 
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
-            if (this.status === 201) {
-                // user created successfully
+            if (this.status === 200) {
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Signed in successfully'
+                  })
             }
-            if (this.status === 409) {
-                // user with email already exists
+            if (this.status === 401) {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Sign in unsuccessful'
+                  })
             }
         }
     };
