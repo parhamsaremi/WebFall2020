@@ -39,6 +39,7 @@ userGrid = function () {
     document.getElementById("tUser").classList.add("active")
 
     // TODO fill comments using data from back
+    loadUsers()
 }
 
 commentGrid = function () {
@@ -93,5 +94,43 @@ acceptComment = (commentId) => {
 rejectComment = (commentId) => {
     let xhttp = new XMLHttpRequest();
     xhttp.open("DELETE", "http://localhost:3000/api/admin/feedback/" + commentId);
+    xhttp.send();
+}
+
+loadUsers = () => {
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status === 200) {
+            showUsers(xhttp.response.users)
+        }
+    };
+    xhttp.open("GET", "http://localhost:3000/api/admin/users/");
+    xhttp.responseType = 'json';
+    xhttp.send();
+}
+
+showUsers = (comments) => {
+    let commentsDiv = document.getElementById("comments")
+
+    commentsDiv.innerHTML = `<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">`;
+
+    for (let item of comments) {
+        commentsDiv.innerHTML += `<div class="container">
+        <div class="row"><div class="col">
+            <div class="media g-mb-30 media-comment">
+              <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
+                <div class="g-mb-15"><h5 class="h5 g-color-gray-dark-v1 mb-0">${item.name}</h5>
+                </div><p>${item.email}</p><ul class="list-inline d-sm-flex my-0">
+                  <li class="list-inline-item g-mr-20">
+                    <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!" onclick="removeUser('${item.email}')">
+                      حذف<i class="fa fa-minus g-pos-rel g-top-1 g-mr-3" style="color: red;"></i>
+                    </a></li></ul></div></div></div></div></div>`
+    }
+}
+
+removeUser = (email) => {
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("DELETE", "http://localhost:3000/api/admin/users/?email=" + email);
     xhttp.send();
 }
