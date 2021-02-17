@@ -8,9 +8,36 @@ newProf = function () {
 }
 
 login = function () {
-    document.getElementById("admin_container").style.display = "flex"
-    document.getElementById("loginPage").style.display = "none"
-    document.getElementById("newProfPanel").style.display = "none"
+    let username = document.getElementById('username').value;
+    let password = document.getElementById('password').value;
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            if (this.status === 200) {
+                // Toast.fire({
+                //     icon: 'success',
+                //     title: 'ورود با موفقیت انجام شد'
+                // })
+                const { token } = xhttp.response;
+                window.localStorage.setItem('token', token);
+
+                document.getElementById("admin_container").style.display = "flex"
+                document.getElementById("loginPage").style.display = "none"
+                document.getElementById("newProfPanel").style.display = "none"
+            }
+            if (this.status === 401) {
+                // Toast.fire({
+                //     icon: 'error',
+                //     title: 'خطا در ورود به حساب کاربری'
+                // })
+            }
+        }
+    };
+    xhttp.open("POST", "http://localhost:3000/api/signin/admin/");
+    xhttp.setRequestHeader('Content-type', 'application/json');
+    xhttp.responseType = 'json';
+    xhttp.send(JSON.stringify({ username, password }));
 }
 
 cancelProf = function () {
@@ -28,7 +55,7 @@ addProf = () => {
     xhttp.open("POST", "http://localhost:3000/api/admin/profs/");
     xhttp.setRequestHeader('Content-type', 'application/json');
     xhttp.send(JSON.stringify({ faName, enName, imagePath, uni }));
-    
+
     document.getElementById("admin_container").style.display = "flex"
     document.getElementById("newProfPanel").style.display = "none"
 }
@@ -72,6 +99,8 @@ loadUnconfirmedComments = () => {
         }
     };
     xhttp.open("GET", "http://localhost:3000/api/admin/unconfirmed/");
+    let token = window.localStorage.getItem("token");
+    xhttp.setRequestHeader("authorization", token);
     xhttp.responseType = 'json';
     xhttp.send();
 }
@@ -102,12 +131,16 @@ showComments = (comments) => {
 acceptComment = (commentId) => {
     let xhttp = new XMLHttpRequest();
     xhttp.open("PUT", "http://localhost:3000/api/admin/confirm/" + commentId);
+    let token = window.localStorage.getItem("token");
+    xhttp.setRequestHeader("authorization", token);
     xhttp.send();
 }
 
 rejectComment = (commentId) => {
     let xhttp = new XMLHttpRequest();
     xhttp.open("DELETE", "http://localhost:3000/api/admin/feedback/" + commentId);
+    let token = window.localStorage.getItem("token");
+    xhttp.setRequestHeader("authorization", token);
     xhttp.send();
 }
 
@@ -119,6 +152,8 @@ loadUsers = () => {
         }
     };
     xhttp.open("GET", "http://localhost:3000/api/admin/users/");
+    let token = window.localStorage.getItem("token");
+    xhttp.setRequestHeader("authorization", token);
     xhttp.responseType = 'json';
     xhttp.send();
 }
@@ -146,6 +181,8 @@ showUsers = (comments) => {
 removeUser = (email) => {
     let xhttp = new XMLHttpRequest();
     xhttp.open("DELETE", "http://localhost:3000/api/admin/users/?email=" + email);
+    let token = window.localStorage.getItem("token");
+    xhttp.setRequestHeader("authorization", token);
     xhttp.send();
 }
 
@@ -157,6 +194,8 @@ loadRequests = () => {
         }
     };
     xhttp.open("GET", "http://localhost:3000/api/admin/requests/");
+    let token = window.localStorage.getItem("token");
+    xhttp.setRequestHeader("authorization", token);
     xhttp.responseType = 'json';
     xhttp.send();
 }
