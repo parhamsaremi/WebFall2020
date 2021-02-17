@@ -61,7 +61,7 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1 class="text-light"><a style="font-family: system-ui;" href="index.html"><span>استاد سنج</span></a></h1>
+        <h1 class="text-light"><a style="font-family: system-ui;" href="panel.html"><span>استاد سنج</span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
@@ -70,8 +70,10 @@
         <ul>
           <li><a id="homeBtn" class="nav-link scrollto selected active" style="font-family: system-ui;" href="#hero"
               onclick="showHome()">خانه</a></li>
-          <li><a id="loginBtn" class="nav-link scrollto" style="font-family: system-ui;" href="#hero"
-              onclick="showLogin()">ثبت‌نام/ورود</a></li>
+          <li><a id="panelBtn" class="nav-link scrollto" style="font-family: system-ui;" href="#hero"
+              onclick="showPanel()">حساب کاربری</a></li>
+          <li><a id="logoutBtn" class="nav-link scrollto" style="font-family: system-ui;" href="#hero"
+              onclick="logout()">خروج</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -96,95 +98,36 @@
       </div>
     </div>
 
-    <div id="loginPage" class="container login-container" style="display: none;">
-      <div class="row">
-        <div class="col-md-6 login-form-1">
-          <h3>ورود</h3>
-          <form>
-            <div class="form-group">
-              <input type="text" class="form-control" id="loginEmail" placeholder="ایمیل" value="" />
-            </div>
-            <div class="form-group">
-              <input type="password" class="form-control" id="loginPass" placeholder="رمز" value="" />
-            </div>
-            <div class="form-group">
-              <input type="submit" class="btnSubmit" onclick="login()" value="وارد شوید" />
-            </div>
-          </form>
-        </div>
-        <div class="col-md-6 login-form-2">
-          <h3>ثبت نام</h3>
-          <form>
-            <div class="form-group">
-              <input type="text" class="form-control" id="signUpName" placeholder="نام" value="" />
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" id="signUpEmail" placeholder="ایمیل" value="" />
-            </div>
-            <div class="form-group">
-              <input type="password" class="form-control" id="signUpPass" placeholder="رمز" value="" />
-            </div>
-            <div class="form-group">
-              <input type="password" class="form-control" id="signUpConfirmPass" placeholder="تایید رمز" value="" />
-            </div>
-            <div class="form-group">
-              <input type="submit" class="btnSubmit" onclick="signup()" value="ثبت نام کنید" />
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-
-
-
-    <div id="teacher_container" style="display: none;">
+    <div id="user_container" style="display: none;">
       <nav id="sidebar">
-        <div class="img bg-wrap text-center py-4" style="background-image: url(nav/images/bg_1.jpg);">
-          <div class="user-logo" id="profInfo">
-            <div class="img" style="background-image: url(nav/images/logo.jpg);"></div>
-            <h3><b>نام استاد</b></h3>
-            <h6>دانشگاه</h6>
-          </div>
-        </div>
         <ul class="list-unstyled components mb-5">
-          <li id="tCharts" class="active" onclick="teacherCharts()">
-            <a href="#"><span class="fa fa-bar-chart mr-3"></span> امتیازها </a>
-          </li>
-          <li id="tComments" onclick="teacherComments()">
-            <a href="#"><span class="bi bi-receipt mr-3"></span> نظرات </a>
+          <li id="tComment" class="active" onclick="fetchComments()">
+            <a href="#"><span class="bi bi-receipt mr-3"></span> نظرات من </a>
           </li>
         </ul>
+
       </nav>
-
-      <div id="info" style="width: 100%;">
+      <div id="info">
+        <!-- Comments -->
         <!-- TODO fix scroll -->
-
-        <div id="charts" style="display: flex; margin-top: 10%; margin-bottom: 10%;">
-          <!-- Chart -->
-        </div>
-        <div id="comments" style="display: none;">
+        <div id="comments" style="display: block;">
           <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
             integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-          <!-- Comments -->
 
         </div>
 
-        <!-- Home -->
-        <!-- <div id="overview">
-          <div>
-            <canvas id="pieChart" style="max-width: 500px;"></canvas>
-          </div>
-        </div> -->
-      </div>
+        <!-- new Professor -->
 
+      </div>
     </div>
-    <!------ Include the above in your HEAD tag ---------->
+
+
 
   </section><!-- End Hero -->
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
       class="bi bi-arrow-up-short"></i></a>
 
-  <script src="index.js"></script>
+  <script src="panel.js"></script>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/aos/aos.js"></script>

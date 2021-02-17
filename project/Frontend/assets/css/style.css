@@ -1530,13 +1530,13 @@ body {
 
 
 #teacher_container {
+  margin: auto;
   margin-top: 5%;
   min-height: 600px;
   display: flex;
   position: relative;
   max-width: 65%;
   background-color: rgba(61, 81, 255, 0.897);
-  margin-left: 17.5%;
 }
 
 #sidebar {
@@ -1584,14 +1584,23 @@ body {
   max-width: 185px!important;
 }
 
-
-
-
 #admin_container {
-  margin-top: 5%;
   min-height: 600px;
   display: flex;
   position: relative;
+  margin: auto;
+  margin-top: 5%;
+  max-width: 65%;
+  background-color: rgba(61, 81, 255, 0.897);
+  margin-left: 17.5%;
+}
+
+#user_container {
+  min-height: 600px;
+  display: flex;
+  position: relative;
+  margin: auto;
+  margin-top: 5%;
   max-width: 65%;
   background-color: rgba(61, 81, 255, 0.897);
   margin-left: 17.5%;
