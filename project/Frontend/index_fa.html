@@ -95,13 +95,13 @@
           <h3>ورود</h3>
           <form>
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="ایمیل" value="" />
+              <input type="text" class="form-control" id="loginEmail" placeholder="ایمیل" value="" />
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" placeholder="رمز" value="" />
+              <input type="password" class="form-control" id="loginPass" placeholder="رمز" value="" />
             </div>
             <div class="form-group">
-              <input type="submit" class="btnSubmit" value="وارد شوید" />
+              <input type="submit" class="btnSubmit" onclick="login()" value="وارد شوید" />
             </div>
           </form>
         </div>
@@ -109,16 +109,19 @@
           <h3>ثبت نام</h3>
           <form>
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="ایمیل" value="" />
+              <input type="text" class="form-control" id="signUpName" placeholder="نام" value="" />
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" placeholder="رمز" value="" />
+              <input type="text" class="form-control" id="signUpEmail" placeholder="ایمیل" value="" />
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" placeholder="تایید رمز" value="" />
+              <input type="password" class="form-control" id="signUpPass" placeholder="رمز" value="" />
             </div>
             <div class="form-group">
-              <input type="submit" class="btnSubmit" value="ثبت نام کنید" />
+              <input type="password" class="form-control" id="signUpConfirmPass" placeholder="تایید رمز" value="" />
+            </div>
+            <div class="form-group">
+              <input type="submit" class="btnSubmit" onclick="signup()" value="ثبت نام کنید" />
             </div>
           </form>
         </div>
