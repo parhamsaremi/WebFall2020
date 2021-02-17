@@ -71,14 +71,14 @@ search = function () {
             const { profs } = xhttp.response; // response: {"profs":[{"name":"Kharazi","id":2},{"name":"Kharrazi","id":1}]}
 
             // front stuff
-            document.getElementById("welcomePage").style.display = "none"
-            document.getElementById("teacher_container").style.display = "flex"
         }
     };
     xhttp.open("GET", `http://localhost:3000/api/profs/search?name=${queryName}`);
     xhttp.responseType = 'json';
     xhttp.send();
 
+    document.getElementById("welcomePage").style.display = "none"
+    document.getElementById("teacher_container").style.display = "inline-flex"
 }
 
 login = () => {
