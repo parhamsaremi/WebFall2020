@@ -72,11 +72,15 @@ router.delete('/users', async (req, res) => {
     return res.sendStatus(204)
 });
 
-/** TODO
+/**
  * add a professor getting name and uni and image
  */
 router.post('/profs', async (req, res) => {
-    return res.sendStatus(404)
+    const { faName, enName, imagePath, uni } = req.body;
+    await db.query("INSERT INTO profs (fa_name, en_name, image_path, uni) "
+        + "VALUES ($1, $2, $3, $4)", [faName, enName, imagePath, uni])
+
+    return res.sendStatus(204)
 });
 
 /**
