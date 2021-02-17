@@ -11,7 +11,7 @@ const pool = new PostgresPool({
 
 const client = new ElasticClient({
     host: process.env.ELASTIC_HOST,
-    log: process.env.ELASTIC_LOG,
+    // log: process.env.ELASTIC_LOG,
 });
 
 const getProfs = (name) => client.search({
@@ -26,9 +26,21 @@ const getProfs = (name) => client.search({
             }
         }
     }
-})
+});
+
+const addProf = (name, imagePath, id) => client.index({
+    index: 'profs',
+    body: {
+        "id": id,
+        "name": name,
+        "imagePath": imagePath,
+    }
+}, (err, resp, status) => {
+    console.log(resp);
+});
 
 module.exports = {
     query: (text, params = []) => pool.query(text, params),
-    getProfs
+    getProfs,
+    addProf
 }
