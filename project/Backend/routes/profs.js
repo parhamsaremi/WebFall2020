@@ -53,7 +53,7 @@ router.get('/comments/:id',
 
         const { rows: comments } = await db.query("SELECT name, comment, created_at FROM "
             + "comments INNER JOIN users ON comments.user_email = users.email "
-            + "WHERE prof_id = $1", [profId])
+            + "WHERE prof_id = $1 AND CONFIRMED = TRUE", [profId])
 
         return res.status(200).send({ comments })
     });
@@ -69,13 +69,10 @@ router.get('/ratings/:id',
         if (!validationResult(req).isEmpty())
             return res.status(400).send({ message: "profId isn't correct" })
 
-        const { rows: comments } = await db.query("SELECT * FROM comments "
-            + "WHERE PROF_ID = $1 AND CONFIRMED = TRUE", [profId])
-
         const { rows: ratingsRows } = await db.query("SELECT * FROM ratings "
             + "WHERE PROF_ID = $1", [profId])
 
-        return res.status(200).send({ comments, ratings: ratingsRows[0] })
+        return res.status(200).send({ ratings: ratingsRows[0] })
     });
 
 /**
