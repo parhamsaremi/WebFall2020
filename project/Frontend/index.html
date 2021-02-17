@@ -42,6 +42,10 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.css" rel="stylesheet" />
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <!-- canvasjs source code -->
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <!-- sweetalert source code -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
   <!-- =======================================================
   * Template Name: Squadfree - v4.0.0
@@ -95,13 +99,13 @@
           <h3>Login</h3>
           <form>
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Your Email *" value="" />
+              <input id="loginEmail" type="text" class="form-control" placeholder="Your Email *" value="" />
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" placeholder="Your Password *" value="" />
+              <input id="loginPass" type="password" class="form-control" placeholder="Your Password *" value="" />
             </div>
             <div class="form-group">
-              <input type="submit" class="btnSubmit" value="Login" />
+              <input type="submit" class="btnSubmit" value="Login" onclick="login()" />
             </div>
           </form>
         </div>
@@ -109,16 +113,16 @@
           <h3>Sign Up</h3>
           <form>
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Your Email *" value="" />
+              <input id="signupEmail" type="text" class="form-control" placeholder="Your Email *" value="" />
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" placeholder="Your Password *" value="" />
+              <input id="signupPass" type="password" class="form-control" placeholder="Your Password *" value="" />
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" placeholder="Confirm Password *" value="" />
+              <input id="signUpConfirmPass" type="password" class="form-control" placeholder="Confirm Password *" value="" />
             </div>
             <div class="form-group">
-              <input type="submit" class="btnSubmit" value="Sign Up" />
+              <input type="submit" class="btnSubmit" value="Sign Up" onclick="signup()"/>
             </div>
           </form>
         </div>
@@ -309,8 +313,8 @@
           </div>
         </div>
         
-        <div id="charts" style="display: none;">
-          s;dfljdas;
+        <div id="charts" style="display: none; margin-top: 5%;">
+
         </div>
 
         <!-- Home -->

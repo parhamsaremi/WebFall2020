@@ -23,18 +23,34 @@ showLogin = function () {
     document.getElementById("teacher_container").style.display = "none"
 }
 
+teacherHome = function () {
+    document.getElementById("tHome").classList.add("active")
+    document.getElementById("tComments").classList.remove("active")
+    document.getElementById("tCharts").classList.remove("active")
+    document.getElementById("overview").style.display = "block"
+    document.getElementById("comments").style.display = "none"
+    document.getElementById("charts").style.display = "none"
+}
+
 teacherComments = function () {
     fetchComments(1); // TODO replace with prof id
 
+    document.getElementById("tHome").classList.remove("active")
     document.getElementById("tComments").classList.add("active")
     document.getElementById("tCharts").classList.remove("active")
-    document.getElementById("comments").style.display = "block"
     document.getElementById("overview").style.display = "none"
+    document.getElementById("comments").style.display = "block"
+    document.getElementById("charts").style.display = "none"
 }
 
 teacherCharts = function () {
-    document.getElementById("tCharts").classList.add("active")
+    document.getElementById("tHome").classList.remove("active")
     document.getElementById("tComments").classList.remove("active")
+    document.getElementById("tCharts").classList.add("active")
+    document.getElementById("overview").style.display = "none"
+    document.getElementById("comments").style.display = "none"
+    document.getElementById("charts").style.display = "block"
+
 
     fetchRatings(1); // TODO replace with prof id
 }
@@ -71,16 +87,32 @@ login = () => {
     let email = document.getElementById('loginEmail').value;
     let password = document.getElementById('loginPass').value;
 
-    // TODO Handle Errors if (sth is wrong) return
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
 
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
             if (this.status === 200) {
-                // login successful
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Signed in successfully'
+                  })
             }
             if (this.status === 401) {
-                // wrong email or password
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Sign in unsuccessful'
+                  })
             }
         }
     };
@@ -96,16 +128,32 @@ signup = () => {
     let password = document.getElementById('signUpPass').value;
     let passwordConfirm = document.getElementById('signUpConfirmPass').value;
 
-    // TODO Handle Input Errors if (sth is wrong) return
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
 
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
-            if (this.status === 201) {
-                // user created successfully
+            if (this.status === 200) {
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Signed in successfully'
+                  })
             }
-            if (this.status === 409) {
-                // user with email already exists
+            if (this.status === 401) {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Sign in unsuccessful'
+                  })
             }
         }
     };
@@ -145,6 +193,7 @@ showComments = (comments) => {
 }
 
 fetchRatings = (profId) => {
+    showCharts({'feature_1':1, 'feature_2':2, 'feature_3': 3, 'feature_4': 4}); // TODO remove this
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status === 200) {
@@ -157,7 +206,29 @@ fetchRatings = (profId) => {
 }
 
 showCharts = (ratings) => {
-    console.log(ratings) // {prof_id: 1, feature_1: "2.50", feature_2: "2.00", feature_3: "3.50", feature_4: "3.50"}
+    let chart = new CanvasJS.Chart("charts", {
+        animationEnabled: true,
+        theme: "dark2", // "light1", "light2", "dark1", "dark2"
+        title: {
+            text: "Teacher scores"
+        },
+        axisY: {
+            title: "Score"
+        },
+        data: [{
+            type: "column", // "bar"  
+            showInLegend: true,
+            legendMarkerColor: "trasparent",
+            legendText: "Scores are ranged from 0 to 5",
+            dataPoints: [
+                { y: ratings['feature_1'], label: "اخلاق" },
+                { y: ratings['feature_2'], label: "نمره" },
+                { y: ratings['feature_3'], label: "درس" },
+                { y: ratings['feature_4'], label: "نظم" }
+            ]
+        }]
+    });
+    chart.render();
 }
 
 fetchProfInfo = (profId) => {
