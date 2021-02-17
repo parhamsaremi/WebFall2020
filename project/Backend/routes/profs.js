@@ -36,7 +36,7 @@ router.get('/info/:id',
         const { rows: info } = await db.query("SELECT fa_name, uni, image_path "
             + "FROM profs WHERE ID = $1", [profId])
 
-        return res.status(200).send({ info })
+        return res.status(200).send({ info: info[0] })
     });
 
 /**
