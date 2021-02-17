@@ -85,20 +85,23 @@ login = () => {
     let email = document.getElementById('loginEmail').value;
     let password = document.getElementById('loginPass').value;
 
-    // TODO Handle Errors if (..) else {
+    // TODO Handle Errors if (sth is wrong) return
+
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
-            console.log(xhttp.response)
-            // TODO handle Errors
-            // TODO act
+            if (this.status === 200) {
+                // login successful
+            }
+            if (this.status === 401) {
+                // wrong email or password
+            }
         }
     };
     xhttp.open("POST", "http://localhost:3000/api/signin/");
     xhttp.setRequestHeader('Content-type', 'application/json');
     xhttp.responseType = 'json';
     xhttp.send(JSON.stringify({ email, password }));
-    // }
 }
 
 signup = () => {
@@ -107,18 +110,21 @@ signup = () => {
     let password = document.getElementById('signUpPass').value;
     let passwordConfirm = document.getElementById('signUpConfirmPass').value;
 
-    // TODO Handle Errors if (..) else {
+    // TODO Handle Input Errors if (sth is wrong) return
+
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
-            console.log(xhttp.response)
-            // TODO handle Errors
-            // TODO act
+            if (this.status === 201) {
+                // user created successfully
+            }
+            if (this.status === 409) {
+                // user with email already exists
+            }
         }
     };
     xhttp.open("POST", "http://localhost:3000/api/signup/");
     xhttp.setRequestHeader('Content-type', 'application/json');
     xhttp.responseType = 'json';
     xhttp.send(JSON.stringify({ name, email, password }));
-    // }
 }
