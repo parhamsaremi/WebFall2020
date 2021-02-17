@@ -28,9 +28,9 @@
 
   <!-- for navbar -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-		
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="nav/css/style.css">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="nav/css/style.css">
 
 
   <!-- Font Awesome -->
@@ -64,8 +64,10 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a id="homeBtn" class="nav-link scrollto selected active" style="font-family: system-ui;" href="#hero" onclick="showHome()">خانه</a></li>
-          <li><a id="loginBtn" class="nav-link scrollto" style="font-family: system-ui;" href="#hero" onclick="showLogin()">ثبت‌نام/ورود</a></li>
+          <li><a id="homeBtn" class="nav-link scrollto selected active" style="font-family: system-ui;" href="#hero"
+              onclick="showHome()">خانه</a></li>
+          <li><a id="loginBtn" class="nav-link scrollto" style="font-family: system-ui;" href="#hero"
+              onclick="showLogin()">ثبت‌نام/ورود</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -76,13 +78,15 @@
   <!-- ======= Hero Section ======= -->
   <section id="hero">
     <div id="welcomePage" class="hero-container" data-aos="fade-up" style="display: flex;">
-      <h1>پرهام این اسم یکم چرته</h1><br />
+      <h1>پرهام این اسم یکم چرته</h1><br /><br />
       <div class="input-group justify-content-center">
         <div class="form-outline">
-          <input type="search" id="form1" class="form-control" style="background-color: aliceblue;height: 40px;margin-top: -1px;" />
+          <input type="search" id="form1" class="form-control" onkeyup="checkForEnter(event)"
+            style="background-color: aliceblue; width: 250px; margin-top: -1px; border-radius: 0.5rem;" />
           <label class="form-label" for="form1" style="color: black">جستجوی استاد</label>
         </div>
-        <button id="searchBtn" type="button" class="btn btn-primary" onclick="search()" style="height: 40px;border-radius: 0.5rem;">
+        <button id="searchBtn" type="button" class="btn btn-primary" onclick="search()"
+          style="height: 40px;border-radius: 0.5rem;">
           <i class="fas fa-search"></i>
         </button>
       </div>
@@ -91,33 +95,36 @@
     <div id="loginPage" class="container login-container" style="display: none;">
       <div class="row">
         <div class="col-md-6 login-form-1">
-          <h3>Login</h3>
+          <h3>ورود</h3>
           <form>
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Your Email *" value="" />
+              <input type="text" class="form-control" id="loginEmail" placeholder="ایمیل" value="" />
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" placeholder="Your Password *" value="" />
+              <input type="password" class="form-control" id="loginPass" placeholder="رمز" value="" />
             </div>
             <div class="form-group">
-              <input type="submit" class="btnSubmit" value="Login" />
+              <input type="submit" class="btnSubmit" onclick="login()" value="وارد شوید" />
             </div>
           </form>
         </div>
         <div class="col-md-6 login-form-2">
-          <h3>Sign Up</h3>
+          <h3>ثبت نام</h3>
           <form>
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Your Email *" value="" />
+              <input type="text" class="form-control" id="signUpName" placeholder="نام" value="" />
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" placeholder="Your Password *" value="" />
+              <input type="text" class="form-control" id="signUpEmail" placeholder="ایمیل" value="" />
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" placeholder="Confirm Password *" value="" />
+              <input type="password" class="form-control" id="signUpPass" placeholder="رمز" value="" />
             </div>
             <div class="form-group">
-              <input type="submit" class="btnSubmit" value="Sign Up" />
+              <input type="password" class="form-control" id="signUpConfirmPass" placeholder="تایید رمز" value="" />
+            </div>
+            <div class="form-group">
+              <input type="submit" class="btnSubmit" onclick="signup()" value="ثبت نام کنید" />
             </div>
           </form>
         </div>
@@ -128,7 +135,6 @@
 
     <div id="teacher_container" style="display: none;">
       <nav id="sidebar">
-        
         <div class="img bg-wrap text-center py-4" style="background-image: url(nav/images/bg_1.jpg);">
           <div class="user-logo">
             <div class="img" style="background-image: url(nav/images/logo.jpg);"></div>
@@ -148,130 +154,13 @@
         </ul>
 
       </nav>
-      <div id="info">
+      <div id="info" style="width: 100%;">
+
+        <!-- TODO fix scroll -->
         <div id="comments" style="display: none;">
-          <!-- Comments -->
-          <!-- TODO fix scroll -->
           <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
             integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-          <div class="container">
-            <div class="row">
-              <div class="col">
-                <div class="media g-mb-30 media-comment">
-                  <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
-                    <div class="g-mb-15">
-                      <h5 class="h5 g-color-gray-dark-v1 mb-0">John Doe</h5>
-                      <span class="g-color-gray-dark-v4 g-font-size-12">5 days ago</span>
-                    </div>
-
-                    <p>Hi, I think it's fair to say that this professor is the best teacher I've ever had.</p>
-
-                    <ul class="list-inline d-sm-flex my-0">
-                      <li class="list-inline-item g-mr-20">
-                        <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
-                          <i class="fa fa-thumbs-up g-pos-rel g-top-1 g-mr-3"></i>
-                          178
-                        </a>
-                      </li>
-                      <li class="list-inline-item g-mr-20">
-                        <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
-                          <i class="fa fa-thumbs-down g-pos-rel g-top-1 g-mr-3"></i>
-                          34
-                        </a>
-                      </li>
-                      <li class="list-inline-item ml-auto">
-                        <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
-                          <i class="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i>
-                          Reply
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-
-
-          <div class="container">
-            <div class="row">
-              <div class="col">
-                <div class="media g-mb-30 media-comment">
-                  <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
-                    <div class="g-mb-15">
-                      <h5 class="h5 g-color-gray-dark-v1 mb-0">John Doe</h5>
-                      <span class="g-color-gray-dark-v4 g-font-size-12">5 days ago</span>
-                    </div>
-
-                    <p>Nope he is the worst.</p>
-
-                    <ul class="list-inline d-sm-flex my-0">
-                      <li class="list-inline-item g-mr-20">
-                        <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
-                          <i class="fa fa-thumbs-up g-pos-rel g-top-1 g-mr-3"></i>
-                          178
-                        </a>
-                      </li>
-                      <li class="list-inline-item g-mr-20">
-                        <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
-                          <i class="fa fa-thumbs-down g-pos-rel g-top-1 g-mr-3"></i>
-                          34
-                        </a>
-                      </li>
-                      <li class="list-inline-item ml-auto">
-                        <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
-                          <i class="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i>
-                          Reply
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="container">
-            <div class="row">
-              <div class="col">
-                <div class="media g-mb-30 media-comment">
-                  <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
-                    <div class="g-mb-15">
-                      <h5 class="h5 g-color-gray-dark-v1 mb-0">John Doe</h5>
-                      <span class="g-color-gray-dark-v4 g-font-size-12">5 days ago</span>
-                    </div>
-
-                    <p>Hi, I think it's fair to say that this professor is the best teacher I've ever had.</p>
-
-                    <ul class="list-inline d-sm-flex my-0">
-                      <li class="list-inline-item g-mr-20">
-                        <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
-                          <i class="fa fa-thumbs-up g-pos-rel g-top-1 g-mr-3"></i>
-                          178
-                        </a>
-                      </li>
-                      <li class="list-inline-item g-mr-20">
-                        <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
-                          <i class="fa fa-thumbs-down g-pos-rel g-top-1 g-mr-3"></i>
-                          34
-                        </a>
-                      </li>
-                      <li class="list-inline-item ml-auto">
-                        <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
-                          <i class="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i>
-                          Reply
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
+          <!-- Comments -->
 
         </div>
 
@@ -281,28 +170,32 @@
               <div class="card-header">Header</div>
               <div class="card-body">
                 <h5 class="card-title">Dark card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                  card's content.</p>
               </div>
             </div>
             <div class="card text-white bg-dark mb-3 ow-card" style="max-width: 18rem;">
               <div class="card-header">Header</div>
               <div class="card-body">
                 <h5 class="card-title">Dark card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                  card's content.</p>
               </div>
             </div>
             <div class="card text-white bg-dark mb-3 ow-card" style="max-width: 18rem;">
               <div class="card-header">Header</div>
               <div class="card-body">
                 <h5 class="card-title">Dark card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                  card's content.</p>
               </div>
             </div>
             <div class="card text-white bg-dark mb-3 ow-card" style="max-width: 18rem;">
               <div class="card-header">Header</div>
               <div class="card-body">
                 <h5 class="card-title">Dark card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                  card's content.</p>
               </div>
             </div>
           </div>
@@ -342,16 +235,17 @@
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
   <script src="nav/js/jquery.min.js"></script>
-    <script src="nav/js/popper.js"></script>
-    <script src="nav/js/bootstrap.min.js"></script>
-    <script src="nav/js/main.js"></script>
+  <script src="nav/js/popper.js"></script>
+  <script src="nav/js/bootstrap.min.js"></script>
+  <script src="nav/js/main.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
 
   <!-- for login form -->
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
+    id="bootstrap-css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
