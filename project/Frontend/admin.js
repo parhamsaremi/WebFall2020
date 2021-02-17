@@ -18,19 +18,34 @@ cancelProf = function () {
     document.getElementById("newProfPanel").style.display = "none"
 }
 
-addProf = function () {
-    // TODO send data to backend
+addProf = () => {
+    let faName = document.getElementById("faName").value;
+    let enName = document.getElementById("enName").value;
+    let imagePath = document.getElementById("imagePath").value;
+    let uni = document.getElementById("uni").value;
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "http://localhost:3000/api/admin/profs/");
+    xhttp.setRequestHeader('Content-type', 'application/json');
+    xhttp.send(JSON.stringify({ faName, enName, imagePath, uni }));
+    
     document.getElementById("admin_container").style.display = "flex"
     document.getElementById("newProfPanel").style.display = "none"
+}
 
+messagesGrid = () => {
+    document.getElementById("tMess").classList.add("active")
+    document.getElementById("tComment").classList.remove("active")
+    document.getElementById("tUser").classList.remove("active")
+    document.getElementById("tProf").classList.remove("active")
+
+    loadRequests();
 }
 
 professorGrid = function () {
     document.getElementById("tProf").classList.add("active")
     document.getElementById("tComment").classList.remove("active")
     document.getElementById("tUser").classList.remove("active")
-
-    // TODO fill comments using data from back
 }
 
 userGrid = function () {
@@ -38,7 +53,6 @@ userGrid = function () {
     document.getElementById("tComment").classList.remove("active")
     document.getElementById("tUser").classList.add("active")
 
-    // TODO fill comments using data from back
     loadUsers()
 }
 
@@ -133,4 +147,34 @@ removeUser = (email) => {
     let xhttp = new XMLHttpRequest();
     xhttp.open("DELETE", "http://localhost:3000/api/admin/users/?email=" + email);
     xhttp.send();
+}
+
+loadRequests = () => {
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status === 200) {
+            showRequests(xhttp.response.requests)
+        }
+    };
+    xhttp.open("GET", "http://localhost:3000/api/admin/requests/");
+    xhttp.responseType = 'json';
+    xhttp.send();
+}
+
+showRequests = (requests) => {
+    let commentsDiv = document.getElementById("comments")
+    console.log(requests);
+
+    commentsDiv.innerHTML = `<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">`;
+
+    for (let item of requests) {
+        commentsDiv.innerHTML += `<div class="container">
+        <div class="row"><div class="col">
+            <div class="media g-mb-30 media-comment">
+              <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
+                <div class="g-mb-15"><h5 class="h5 g-color-gray-dark-v1 mb-0">${item.name}</h5>
+                <span class="g-color-gray-dark-v4 g-font-size-12">${item.uni}</span>
+                </div><p>${item.description}</p></div></div></div></div></div>`
+    }
 }
