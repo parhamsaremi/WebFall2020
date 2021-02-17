@@ -165,5 +165,5 @@ fetchRatings = (profId) => {
 }
 
 showCharts = (ratings) => {
-    console.log(ratings)
+    console.log(ratings) // {prof_id: 1, feature_1: "2.50", feature_2: "2.00", feature_3: "3.50", feature_4: "3.50"}
 }
