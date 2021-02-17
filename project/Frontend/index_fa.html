@@ -142,21 +142,21 @@
           </div>
         </div>
         <ul class="list-unstyled components mb-5">
-          <li id="tHome" class="active" onclick="teacherHome()">
-            <a href="#"><span class="fa fa-home mr-3"></span> Home</a>
-          </li>
-          <li id="tCharts" onclick="teacherCharts()">
-            <a href="#"><span class="fa fa-bar-chart mr-3"></span> Charts</a>
+          <li id="tCharts" class="active" onclick="teacherCharts()">
+            <a href="#"><span class="fa fa-bar-chart mr-3"></span> امتیازها </a>
           </li>
           <li id="tComments" onclick="teacherComments()">
-            <a href="#"><span class="bi bi-receipt mr-3"></span> Comments</a>
+            <a href="#"><span class="bi bi-receipt mr-3"></span> نظرات </a>
           </li>
         </ul>
-
       </nav>
-      <div id="info" style="width: 100%;">
 
+      <div id="info" style="width: 100%;">
         <!-- TODO fix scroll -->
+
+        <div id="chart" style="display: flex;">
+          <!-- Chart -->
+        </div>
         <div id="comments" style="display: none;">
           <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
             integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -164,60 +164,16 @@
 
         </div>
 
-        <div id="overview">
-          <div class="row">
-            <div class="card text-white bg-dark mb-3 ow-card" style="max-width: 18rem;">
-              <div class="card-header">Header</div>
-              <div class="card-body">
-                <h5 class="card-title">Dark card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
-              </div>
-            </div>
-            <div class="card text-white bg-dark mb-3 ow-card" style="max-width: 18rem;">
-              <div class="card-header">Header</div>
-              <div class="card-body">
-                <h5 class="card-title">Dark card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
-              </div>
-            </div>
-            <div class="card text-white bg-dark mb-3 ow-card" style="max-width: 18rem;">
-              <div class="card-header">Header</div>
-              <div class="card-body">
-                <h5 class="card-title">Dark card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
-              </div>
-            </div>
-            <div class="card text-white bg-dark mb-3 ow-card" style="max-width: 18rem;">
-              <div class="card-header">Header</div>
-              <div class="card-body">
-                <h5 class="card-title">Dark card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
         <!-- Home -->
         <!-- <div id="overview">
           <div>
             <canvas id="pieChart" style="max-width: 500px;"></canvas>
           </div>
         </div> -->
-
       </div>
+
     </div>
     <!------ Include the above in your HEAD tag ---------->
-
-
-
-
-
-
 
   </section><!-- End Hero -->
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
