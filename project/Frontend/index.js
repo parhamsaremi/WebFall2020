@@ -23,19 +23,10 @@ showLogin = function () {
     document.getElementById("teacher_container").style.display = "none"
 }
 
-teacherHome = function () {
-    document.getElementById("tHome").classList.add("active")
-    document.getElementById("tComments").classList.remove("active")
-    document.getElementById("tCharts").classList.remove("active")
-    document.getElementById("overview").style.display = "block"
-    document.getElementById("comments").style.display = "none"
-}
-
 teacherComments = function () {
     fetchComments(1); // TODO replace with prof id
-    
+
     document.getElementById("tComments").classList.add("active")
-    document.getElementById("tHome").classList.remove("active")
     document.getElementById("tCharts").classList.remove("active")
     document.getElementById("comments").style.display = "block"
     document.getElementById("overview").style.display = "none"
@@ -44,7 +35,6 @@ teacherComments = function () {
 teacherCharts = function () {
     document.getElementById("tCharts").classList.add("active")
     document.getElementById("tComments").classList.remove("active")
-    document.getElementById("tHome").classList.remove("active")
 
     fetchRatings(1); // TODO replace with prof id
 }
@@ -73,6 +63,8 @@ search = function () {
 
     document.getElementById("welcomePage").style.display = "none"
     document.getElementById("teacher_container").style.display = "flex"
+
+    fetchProfInfo(2);
 }
 
 login = () => {
@@ -166,4 +158,29 @@ fetchRatings = (profId) => {
 
 showCharts = (ratings) => {
     console.log(ratings) // {prof_id: 1, feature_1: "2.50", feature_2: "2.00", feature_3: "3.50", feature_4: "3.50"}
+}
+
+fetchProfInfo = (profId) => {
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status === 200) {
+            console.log(xhttp.response.info)
+            showProf(xhttp.response.info)
+        }
+    };
+    xhttp.open("GET", "http://localhost:3000/api/profs/info/" + profId);
+    xhttp.responseType = 'json';
+    xhttp.send();
+}
+
+showProf = (info) => {
+    let infoDiv = document.getElementById("profInfo")
+
+    let imageUrl = `url(${info.image_path || "nav/images/logo.jpg"})`
+
+    template = `<div class="img" style="background-image: ${imageUrl};"></div>
+    <h3><b>${info.fa_name}</b></h3>
+    <h6>${info.uni}</h6>`
+
+    infoDiv.innerHTML = template
 }
