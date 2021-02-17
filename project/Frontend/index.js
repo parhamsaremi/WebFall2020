@@ -69,8 +69,8 @@ search = function () {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status === 200) {
             const { profs } = xhttp.response; // response: {"profs":[{"name":"Kharazi","id":2},{"name":"Kharrazi","id":1}]}
-            console.log(profs)
-            // front
+            
+            // front stuff
             document.getElementById("welcomePage").style.display = "none"
             document.getElementById("teacher_container").style.display = "flex"
         }
