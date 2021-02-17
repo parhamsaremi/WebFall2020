@@ -1588,6 +1588,7 @@ body {
 
 
 #admin_container {
+  margin: auto;
   margin-top: 5%;
   min-height: 600px;
   display: flex;
