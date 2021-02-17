@@ -114,20 +114,20 @@
     <div id="admin_container" style="display: none;">
       <nav id="sidebar">
         <ul class="list-unstyled components mb-5">
-          <li id="tHome" class="active" onclick="">
+          <li id="tProf" class="active" onclick="professorGrid()">
             <a href="#"><span class="fa bi-people mr-3"></span> Professors   <button type="button" class="btn-sm btn-success" onclick="newProf()">new</button></a>
           </li>
-          <li id="tCharts" onclick="teacherCharts()">
+          <li id="tUser" onclick="userGrid()">
             <a href="#"><span class="fa bi-person mr-3"></span> Users</a>
           </li>
-          <li id="tComments" onclick="teacherComments()">
+          <li id="tComment" onclick="commentGrid()">
             <a href="#"><span class="bi bi-receipt mr-3"></span> Comments</a>
           </li>
         </ul>
 
       </nav>
       <div id="info">
-        <div id="comments" style="display: none;">
+        <div id="comments" style="display: block;">
 
           <!-- Comments -->
           <!-- TODO fix scroll -->
