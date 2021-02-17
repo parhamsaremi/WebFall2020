@@ -11,8 +11,8 @@ const isNumeric = (value) => /^-?\d+$/.test(value);
 router.get('/unconfirmed', async (req, res) => {
 
     const { rows: comments } = await db.query("SELECT id, name, comment FROM "
-      + "comments INNER JOIN users ON comments.user_email = users.email "
-      + "WHERE confirmed = FALSE")
+        + "comments INNER JOIN users ON comments.user_email = users.email "
+        + "WHERE confirmed = FALSE")
 
     return res.status(200).send({ comments })
 });
@@ -49,7 +49,7 @@ router.get('/users', async (req, res) => {
  */
 router.delete('/feedback/:id', async (req, res) => {
     const { id: commentId } = req.params
-    
+
     if (!isNumeric(commentId))
         return res.status(400).send({ message: 'comment id is not valid' })
 
@@ -66,7 +66,7 @@ router.delete('/users', async (req, res) => {
     if (email === undefined) {
         return res.status(400).send({ message: "email isn't specified" })
     }
-    
+
     await db.query("DELETE FROM users WHERE email = $1", [email])
 
     return res.sendStatus(204)
@@ -78,5 +78,16 @@ router.delete('/users', async (req, res) => {
 router.post('/profs', async (req, res) => {
     return res.sendStatus(404)
 });
+
+/**
+ * returns requests
+ */
+router.get('/requests', async (req, res) => {
+
+    const { rows: requests } = await db.query("SELECT * FROM requests")
+
+    return res.status(200).send({ requests })
+});
+
 
 module.exports = router
