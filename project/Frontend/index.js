@@ -58,7 +58,7 @@ teacherCharts = function () {
   document.getElementById("tComments").classList.remove("active");
   document.getElementById("tCharts").classList.add("active");
   document.getElementById("comments").style.display = "none";
-  document.getElementById("charts").style.display = "block";
+  document.getElementById("charts").style.display = "flex";
 
   fetchRatings(1); // TODO replace with prof id
 };
@@ -309,7 +309,14 @@ showCharts = (ratings) => {
     ],
   });
   chart.render();
-  //   document.getElementsByClassName("canvasjs-chart-container")[0].style.direction="rtl";
+  document.getElementsByClassName(
+    "canvasjs-chart-container"
+  )[0].style.direction = "rtl";
+  document.getElementById("charts").style.display = "block";
+  document.getElementById("tComments").classList.remove("active");
+  document.getElementById("tCharts").classList.add("active");
+  document.getElementById("comments").style.display = "none";
+  document.getElementById("charts").style.display = "flex";
   //   document.getElementsByClassName("canvasjs-chart-container")[0].style['margin-right']="20  %";
 };
 
@@ -378,5 +385,5 @@ getProfData = (id) => {
 };
 
 showPanel = () => {
-    window.location="panel.html"
+  window.location = "panel.html";
 };
