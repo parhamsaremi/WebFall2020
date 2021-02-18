@@ -372,10 +372,16 @@ newComment = () => {
     },
   });
 
-  Toast.fire({
-    icon: "error",
-    title: "برای نظر دادن باید وارد حساب کاربری خود شوید.",
-  });
+  if(window.localStorage.getItem('token')===null){
+    Toast.fire({
+        icon: "error",
+        title: "برای نظر دادن باید وارد حساب کاربری خود شوید.",
+      });
+  }
+  else{
+    document.getElementById("newCommentPanel").style.display = "block";
+    document.getElementById("teacher_container").style.display = "none";
+  }
 };
 
 getProfData = (id) => {
