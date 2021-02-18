@@ -210,14 +210,14 @@ signup = () => {
 fetchComments = (profId) => {
     showComments("")
     let xhttp = new XMLHttpRequest();
-    // xhttp.onreadystatechange = function () {
-    //     if (this.readyState == 4 && this.status === 200) {
-    //         showComments(xhttp.response.comments)
-    //     }
-    // };
-    // xhttp.open("GET", "http://localhost:3000/api/profs/comments/" + profId);
-    // xhttp.responseType = 'json';
-    // xhttp.send();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status === 200) {
+            showComments(xhttp.response.comments)
+        }
+    };
+    xhttp.open("GET", "http://localhost:3000/api/profs/comments/" + profId);
+    xhttp.responseType = 'json';
+    xhttp.send();
 }
 
 showComments = (comments) => {
@@ -307,25 +307,25 @@ showProf = (info) => {
 }
 
 newComment = () =>{
-    // TODO check if logged in
+    // TODO show Error
 
-    document.getElementById("newCommentPanel").style.display="block"
-    document.getElementById("teacher_container").style.display="none"
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+
+    Toast.fire({
+        icon: 'error',
+        title: 'برای نظر دادن باید وارد حساب کاربری خود شوید.'
+    })
 }
 
 
 
-addComment = () => {
-    // TODO send request
-
-    document.getElementById("newCommentPanel").style.display="none"
-    document.getElementById("teacher_container").style.display="flex"
-
-}
-
-
-cancelComment = () => {
-    document.getElementById("newCommentPanel").style.display="none"
-    document.getElementById("teacher_container").style.display="flex"
-
-}

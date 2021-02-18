@@ -106,6 +106,14 @@ showComments = (comments) => {
     rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
      crossorigin="anonymous">`;
 
+     commentsDiv.innerHTML += `<div class="form-group justify-content-center">
+     <button class="btn btn-success" style="margin-left: 40%;" onclick="newComment()">کامنت جدید</button>
+   </div>`
+
+     if(comments === ""){
+        return
+    }
+
     for (let item of comments) {
         commentsDiv.innerHTML += `<div class="container">
         <div class="row">
@@ -127,4 +135,26 @@ showComments = (comments) => {
         </div>
       </div>`
     }
+}
+
+
+addComment = () => {
+    // TODO send request
+
+    document.getElementById("newCommentPanel").style.display="none"
+    document.getElementById("user_container").style.display="flex"
+
+}
+
+
+cancelComment = () => {
+    document.getElementById("newCommentPanel").style.display="none"
+    document.getElementById("user_container").style.display="flex"
+
+}
+
+
+newComment = () => {
+    document.getElementById("newCommentPanel").style.display="block"
+    document.getElementById("user_container").style.display="none"
 }
