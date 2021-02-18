@@ -46,7 +46,8 @@ teacherHome = function () {
 };
 
 teacherComments = function () {
-  fetchComments(1); // TODO replace with prof id
+  let profId = window.localStorage.getItem('profId');
+  fetchComments(profId);
 
   document.getElementById("tComments").classList.add("active");
   document.getElementById("tCharts").classList.remove("active");
@@ -60,7 +61,9 @@ teacherCharts = function () {
   document.getElementById("comments").style.display = "none";
   document.getElementById("charts").style.display = "flex";
 
-  fetchRatings(1); // TODO replace with prof id
+  
+  let profId = window.localStorage.getItem('profId');
+  fetchRatings(profId);
 };
 
 function checkForEnter(event) {
@@ -401,6 +404,7 @@ newComment = (profId) => {
 };
 
 getProfData = (id) => {
+  window.localStorage.setItem('profId', id);
   fetchProfInfo(id);
   fetchRatings(id);
 
