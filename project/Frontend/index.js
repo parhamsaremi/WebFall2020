@@ -86,7 +86,7 @@ search = function () {
       for (let prof of profs) {
         link = `url(${prof.image_path || "nav/images/logo.jpg"})`;
         finalDiv.innerHTML += `<div id="profSearch_${prof.id}" class="col-lg-3 col-md-8 filter-app" 
-                onclick="getProfData(${prof.id})" style="background-color: white;">
+                onclick="getProfData(${prof.id})" style="background-color: white;margin-top: 2%;">
           <div class="img bg-wrap text-center py-4"><div class="user-logo" id="profInfo_${prof.id}">
               <div class="img" style="background-image: ${link};"></div>
               <h3><b>${prof.name}</b></h3></div></div></div>`;
