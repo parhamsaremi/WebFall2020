@@ -108,7 +108,7 @@
               <input type="password" class="form-control" id="loginPass" placeholder="رمز" value="" />
             </div>
             <div class="form-group">
-              <input type="button" class="btnSubmit" onclick="login()" value="وارد شوید" />
+              <input type="button" class="btn btnSubmit" onclick="login()" value="وارد شوید" />
             </div>
           </form>
         </div>
@@ -128,7 +128,7 @@
               <input type="password" class="form-control" id="signUpConfirmPass" placeholder="تایید رمز" value="" />
             </div>
             <div class="form-group">
-              <input type="button" class="btnSubmit" onclick="signup()" value="ثبت نام کنید" />
+              <input type="button" class="btn btnSubmit" onclick="signup()" value="ثبت نام کنید" />
             </div>
           </form>
         </div>
@@ -183,7 +183,7 @@
   </section><!-- End Hero -->
 
 
-  <section id="portfolio" class="portfolio">
+  <section id="portfolio" class="portfolio" style="display:none;">
 
 
     <div class="section-title aos-init aos-animate" data-aos="fade-in" data-aos-delay="100" style="margin-top: 5%;">
@@ -193,45 +193,14 @@
 
     <div class="container">
 
-      <div class="row portfolio-container aos-init aos-animate" data-aos="fade-up"
+      <div id ="serach_results"class="row portfolio-container aos-init aos-animate" data-aos="fade-up"
         style="position: relative; height: 1026px;">
 
-        <div class="col-lg-3 col-md-8 portfolio-item filter-app" style="position: absolute; left: 0px; top: 0px; background-color: white;">
+        <div class="col-lg-3 col-md-8 portfolio-item filter-app" onclick="getProfData(1)" style="position: absolute; left: 0px; top: 0px; background-color: white;">
           <div class="img bg-wrap text-center py-4">
             <div class="user-logo" id="profInfo">
               <div class="img" style="background-image: url(nav/images/logo.jpg);"></div>
               <h3><b>نام استاد</b></h3>
-              <h6>دانشگاه</h6>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-8 portfolio-item filter-app" style="position: absolute; left: 0px; top: 0px; background-color: white;">
-          <div class="img bg-wrap text-center py-4">
-            <div class="user-logo" id="profInfo">
-              <div class="img" style="background-image: url(nav/images/logo.jpg);"></div>
-              <h3><b>نام استاد</b></h3>
-              <h6>دانشگاه</h6>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-8 portfolio-item filter-app" style="position: absolute; left: 0px; top: 0px; background-color: white;">
-          <div class="img bg-wrap text-center py-4">
-            <div class="user-logo" id="profInfo">
-              <div class="img" style="background-image: url(nav/images/logo.jpg);"></div>
-              <h3><b>نام استاد</b></h3>
-              <h6>دانشگاه</h6>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-8 portfolio-item filter-app" style="position: absolute; left: 0px; top: 0px; background-color: white;">
-          <div class="img bg-wrap text-center py-4">
-            <div class="user-logo" id="profInfo">
-              <div class="img" style="background-image: url(nav/images/logo.jpg);"></div>
-              <h3><b>نام استاد</b></h3>
-              <h6>دانشگاه</h6>
             </div>
           </div>
         </div>
@@ -240,7 +209,6 @@
             <div class="user-logo" id="profInfo">
               <div class="img" style="background-image: url(nav/images/logo.jpg);"></div>
               <h3><b>نام استاد</b></h3>
-              <h6>دانشگاه</h6>
             </div>
           </div>
         </div>
@@ -249,12 +217,17 @@
             <div class="user-logo" id="profInfo">
               <div class="img" style="background-image: url(nav/images/logo.jpg);"></div>
               <h3><b>نام استاد</b></h3>
-              <h6>دانشگاه</h6>
             </div>
           </div>
         </div>
-        
-
+        <div class="col-lg-3 col-md-8 portfolio-item filter-app" style="position: absolute; left: 0px; top: 0px; background-color: white;">
+          <div class="img bg-wrap text-center py-4">
+            <div class="user-logo" id="profInfo">
+              <div class="img" style="background-image: url(nav/images/logo.jpg);"></div>
+              <h3><b>نام استاد</b></h3>
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>
