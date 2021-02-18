@@ -61,7 +61,7 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1 class="text-light"><a style="font-family: system-ui;" href="panel.html"><span>استاد سنج</span></a></h1>
+        <h1 class="text-light"><a style="font-family: system-ui;" href="index_fa.html"><span>استاد سنج</span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
@@ -70,8 +70,6 @@
         <ul>
           <li><a id="homeBtn" class="nav-link scrollto selected active" style="font-family: system-ui;" href="#hero"
               onclick="showHome()">خانه</a></li>
-          <li><a id="panelBtn" class="nav-link scrollto" style="font-family: system-ui;" href="#hero"
-              onclick="showPanel()">حساب کاربری</a></li>
           <li><a id="logoutBtn" class="nav-link scrollto" style="font-family: system-ui;" href="#hero"
               onclick="logout()">خروج</a></li>
         </ul>
@@ -83,52 +81,9 @@
 
   <!-- ======= Hero Section ======= -->
   <section id="hero">
-    <div id="welcomePage" class="hero-container" data-aos="fade-up" style="display: flex;">
-      <h1>پرهام این اسم یکم چرته</h1><br /><br />
-      <div class="input-group justify-content-center">
-        <div class="form-outline">
-          <input type="search" id="form1" class="form-control" onkeyup="checkForEnter(event)"
-            style="background-color: aliceblue; width: 250px; margin-top: -1px; border-radius: 0.5rem;" />
-          <label class="form-label" for="form1" style="color: black">جستجوی استاد</label>
-        </div>
-        <button id="searchBtn" type="button" class="btn btn-primary" onclick="search()"
-          style="height: 40px;border-radius: 0.5rem;">
-          <i class="fas fa-search"></i>
-        </button>
-      </div>
-    </div>
 
 
-    <div id="newCommentPanel" class="container login-container" style="display: none;max-width: 30%;">
-      <div class="login-form-1">
-        <h3>افزودن نظر</h3>
-        <form>
-          <div class="form-group">
-            <input type="text" class="form-control" id="faName" placeholder="نام *" value="" />
-          </div>
-          <div class="form-group">
-            <textarea class="form-control" id="enName" placeholder="متن *" value="" rows="3"></textarea>
-          </div>
-
-          <label for="customRange1" class="form-label">نظم</label>
-          <input type="range" class="form-range" min="0" max="5" step="1" id="customRange1">
-          <label for="customRange2" class="form-label">اخلاق</label>
-          <input type="range" class="form-range" min="0" max="5" step="1" id="customRange2">
-          <label for="customRange3" class="form-label">کیقیت تدریس</label>
-          <input type="range" class="form-range" min="0" max="5" step="1" id="customRange3">
-          <label for="customRange4" class="form-label">نمره دادن</label>
-          <input type="range" class="form-range" min="0" max="5" step="1" id="customRange4">
-
-          <div class="form-group">
-            <input type="button" class="btn btn-success" value="اضافه" onclick="addComment()" style="min-width: 42%;" />
-            <input type="button" class="btn btn-danger" value="انصراف" onclick="cancelComment()"
-              style="min-width: 42%;margin-left: 10%;" />
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <div id="user_container" style="display: none;">
+    <div id="user_container" style="display: flex;">
       <nav id="sidebar">
         <ul class="list-unstyled components mb-5">
           <li id="tComment" class="active" onclick="fetchComments()">

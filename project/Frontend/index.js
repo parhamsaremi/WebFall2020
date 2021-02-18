@@ -2,6 +2,20 @@ var email_validator_regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\
 var pass_validator_regex = /^.+$/;
 
 load = function () {
+
+    // TODO check if token is valid
+
+    let token = window.localStorage.getItem('token')
+
+    if(token === null){
+        document.getElementById("loginBtn").style.display="flex"
+        document.getElementById("panelBtn").style.display="none"
+    }
+    else{
+        document.getElementById("loginBtn").style.display="none"
+        document.getElementById("panelBtn").style.display="flex"
+    }
+
   // showHome()
   // fillChart()
 };
@@ -93,10 +107,10 @@ search = function () {
   xhttp.responseType = "json";
   xhttp.send();
 
-//   document.getElementById("welcomePage").style.display = "none"; 
+  //   document.getElementById("welcomePage").style.display = "none";
   let serachResult = document.getElementById("portfolio");
   serachResult.style.display = "block";
-//   serachResult.scrollIntoView();
+  //   serachResult.scrollIntoView();
   // document.getElementById("teacher_container").style.display = "flex"
 
   fetchProfInfo(2);
@@ -141,6 +155,9 @@ login = () => {
           icon: "success",
           title: "ورود با موفقیت انجام شد",
         });
+
+        document.getElementById("loginBtn").style.display = "none";
+        document.getElementById("panelBtn").style.display = "flex";
       }
       if (this.status === 401) {
         Toast.fire({
@@ -328,32 +345,53 @@ showProf = (info) => {
   infoDiv.innerHTML = template;
 };
 
-newComment = () => {
+getProfData = (id) => {
+  // TODO connect to backend
+  console.log(id);
 
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener("mouseenter", Swal.stopTimer);
-      toast.addEventListener("mouseleave", Swal.resumeTimer);
-    },
-  });
-
-  Toast.fire({
-    icon: "error",
-    title: "برای نظر دادن باید وارد حساب کاربری خود شوید.",
-  });
+  document.getElementById("portfolio").style.display = "none";
+  document.getElementById("teacher_container").style.display = "flex";
+  document.getElementById("welcomePage").style.display = "none";
 };
 
 
-getProfData = (id) =>{
-    // TODO connect to backend
-    console.log(id)
+addComment = () => {
+    // TODO send request
 
-    document.getElementById("portfolio").style.display="none"
+    document.getElementById("newCommentPanel").style.display="none"
     document.getElementById("teacher_container").style.display="flex"
-    document.getElementById("welcomePage").style.display="none"
+
+}
+
+
+cancelComment = () => {
+    document.getElementById("newCommentPanel").style.display="none"
+    document.getElementById("teacher_container").style.display="flex"
+
+}
+
+
+newComment = () => {
+    
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", Swal.stopTimer);
+          toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+      });
+    
+    if(window.localStorage.getItem('token')===null){
+        Toast.fire({
+            icon: "error",
+            title: "برای نظر دادن باید وارد حساب کاربری خود شوید.",
+          });
+          return;
+    }
+    document.getElementById("newCommentPanel").style.display="block"
+    document.getElementById("teacher_container").style.display="none"
 }
