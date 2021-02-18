@@ -309,6 +309,8 @@ showCharts = (ratings) => {
     ],
   });
   chart.render();
+  //   document.getElementsByClassName("canvasjs-chart-container")[0].style.direction="rtl";
+  //   document.getElementsByClassName("canvasjs-chart-container")[0].style['margin-right']="20  %";
 };
 
 fetchProfInfo = (profId) => {
@@ -373,4 +375,8 @@ getProfData = (id) => {
   document.getElementById("portfolio").style.display = "none";
   document.getElementById("teacher_container").style.display = "flex";
   document.getElementById("welcomePage").style.display = "none";
+};
+
+showPanel = () => {
+    window.location="panel.html"
 };
