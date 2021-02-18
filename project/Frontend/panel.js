@@ -59,7 +59,7 @@ search = function () {
 }
 
 fetchComments = () => {
-    showComments([{comment: 'سلام چطوری؟', id: 2}, {comment: 'خوبم ممنون', id: 3}])
+    // showComments([{comment: 'سلام چطوری؟', id: 2}, {comment: 'خوبم ممنون', id: 3}])
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status === 200) {
@@ -67,6 +67,8 @@ fetchComments = () => {
         }
     };
     xhttp.open("GET", "http://localhost:3000/api/feedback/");
+    let token = window.localStorage.getItem("token");
+    xhttp.setRequestHeader("authorization", token);
     xhttp.responseType = 'json';
     xhttp.send();
 }
@@ -95,6 +97,8 @@ deleteComment = (commentId) => {
         }
     };
     xhttp.open("DELETE", "http://localhost:3000/api/feedback/" + commentId);
+    let token = window.localStorage.getItem("token");
+    xhttp.setRequestHeader("authorization", token);
     xhttp.responseType = 'json';
     xhttp.send();
 }

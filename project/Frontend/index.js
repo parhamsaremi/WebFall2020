@@ -147,6 +147,9 @@ login = () => {
           title: "ورود با موفقیت انجام شد",
         });
 
+        const { token } = xhttp.response;
+        window.localStorage.setItem('token', token);
+
         document.getElementById("loginBtn").style.display = "none";
         document.getElementById("panelBtn").style.display = "flex";
       }
@@ -271,7 +274,7 @@ showComments = (comments) => {
 };
 
 fetchRatings = (profId) => {
-  showCharts({ feature_1: 1, feature_2: 2, feature_3: 3, feature_4: 4 });
+  // showCharts({ feature_1: 1, feature_2: 2, feature_3: 3, feature_4: 4 });
   let xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status === 200) {
@@ -288,17 +291,17 @@ showCharts = (ratings) => {
     animationEnabled: true,
     theme: "light2", // "light1", "light2", "dark1", "dark2"
     title: {
-      text: "Teacher scores",
+      text: "میانگین امتیازها",
     },
     axisY: {
-      title: "Score",
+      title: "امتیاز",
     },
     data: [
       {
         type: "column", // "bar"
         showInLegend: true,
         legendMarkerColor: "trasparent",
-        legendText: "Scores are ranged from 0 to 5",
+        legendText: "امتیازها بین 0 تا 5 هستند",
         dataPoints: [
           { y: +ratings["feature_1"], label: "اخلاق" },
           { y: +ratings["feature_2"], label: "نمره دادن" },
