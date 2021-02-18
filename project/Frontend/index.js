@@ -2,19 +2,17 @@ var email_validator_regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\
 var pass_validator_regex = /^.+$/;
 
 load = function () {
+  // TODO check if token is valid
 
-    // TODO check if token is valid
+  let token = window.localStorage.getItem("token");
 
-    let token = window.localStorage.getItem('token')
-
-    if(token === null){
-        document.getElementById("loginBtn").style.display="flex"
-        document.getElementById("panelBtn").style.display="none"
-    }
-    else{
-        document.getElementById("loginBtn").style.display="none"
-        document.getElementById("panelBtn").style.display="flex"
-    }
+  if (token === null) {
+    document.getElementById("loginBtn").style.display = "flex";
+    document.getElementById("panelBtn").style.display = "none";
+  } else {
+    document.getElementById("loginBtn").style.display = "none";
+    document.getElementById("panelBtn").style.display = "flex";
+  }
 
   // showHome()
   // fillChart()
@@ -72,33 +70,29 @@ function checkForEnter(event) {
 search = function () {
   let queryName = document.getElementById("form1").value;
 
+  let portfolioSection = document.getElementById("portfolio");
+  let finalDiv = document.getElementById("search_results");
+
   if (queryName.length < 3) return;
   let xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status === 200) {
       const { profs } = xhttp.response; // response: {"profs":[{"name":"Kharazi","id":2},{"name":"Kharrazi","id":1}]}
 
-      let serachResult = document.getElementById("portofolio");
-      serachResult.style.display = "block";
-      serachResult.scrollIntoView();
-      let finalDiv = document.getElementById("serach_results");
+      portfolioSection.style.display = "block";
       finalDiv.innerHTML = ``;
-      for (prof in profs) {
-        link = url(nav / images / logo.jpg); // TODO fix this link
-        finalDiv.innerHTML += `
-                
-                <div id="profSearch_${prof.id}" class="col-lg-3 col-md-8 portfolio-item filter-app" onclick="getProfData(${prof.id})" style="position: absolute; left: 0px; top: 0px; background-color: white;">
-          <div class="img bg-wrap text-center py-4">
-            <div class="user-logo" id="profInfo">
+
+      console.log(profs);
+      for (let prof of profs) {
+        link = `url(${prof.image_path || "nav/images/logo.jpg"})`;
+        finalDiv.innerHTML += `<div id="profSearch_${prof.id}" class="col-lg-3 col-md-8 filter-app" 
+                onclick="getProfData(${prof.id})" style="background-color: white;">
+          <div class="img bg-wrap text-center py-4"><div class="user-logo" id="profInfo_${prof.id}">
               <div class="img" style="background-image: ${link};"></div>
-              <h3><b>${prof.name}</b></h3>
-            </div>
-          </div>
-        </div>
-                `;
+              <h3><b>${prof.name}</b></h3></div></div></div>`;
       }
 
-      // front stuff
+      scrollTo({ top: finalDiv.offsetTop, behavior: "smooth" });
     } else {
       // TODO show error
     }
@@ -107,13 +101,11 @@ search = function () {
   xhttp.responseType = "json";
   xhttp.send();
 
-  //   document.getElementById("welcomePage").style.display = "none";
-  let serachResult = document.getElementById("portfolio");
-  serachResult.style.display = "block";
-  //   serachResult.scrollIntoView();
-  // document.getElementById("teacher_container").style.display = "flex"
+  portfolioSection.style.display = "block";
 
-  fetchProfInfo(2);
+  scrollTo({ top: finalDiv.offsetTop, behavior: "smooth" });
+
+  // fetchProfInfo(2);
 };
 
 login = () => {
@@ -137,7 +129,6 @@ login = () => {
       icon: "error",
       title: "فرمت ایمیل ورودی صحیح نیست",
     });
-    return;
   }
 
   if (!pass_validator_regex.test(password)) {
@@ -280,7 +271,7 @@ showComments = (comments) => {
 };
 
 fetchRatings = (profId) => {
-  showCharts({ feature_1: 1, feature_2: 2, feature_3: 3, feature_4: 4 }); // TODO remove this
+  showCharts({ feature_1: 1, feature_2: 2, feature_3: 3, feature_4: 4 });
   let xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status === 200) {
@@ -309,10 +300,10 @@ showCharts = (ratings) => {
         legendMarkerColor: "trasparent",
         legendText: "Scores are ranged from 0 to 5",
         dataPoints: [
-          { y: ratings["feature_1"], label: "اخلاق" },
-          { y: ratings["feature_2"], label: "نمره دادن" },
-          { y: ratings["feature_3"], label: "کیفیت تدریس" },
-          { y: ratings["feature_4"], label: "نظم" },
+          { y: +ratings["feature_1"], label: "اخلاق" },
+          { y: +ratings["feature_2"], label: "نمره دادن" },
+          { y: +ratings["feature_3"], label: "کیفیت تدریس" },
+          { y: +ratings["feature_4"], label: "نظم" },
         ],
       },
     ],
@@ -324,7 +315,6 @@ fetchProfInfo = (profId) => {
   let xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status === 200) {
-      console.log(xhttp.response.info);
       showProf(xhttp.response.info);
     }
   };
@@ -345,53 +335,42 @@ showProf = (info) => {
   infoDiv.innerHTML = template;
 };
 
+addComment = () => {
+  // TODO send request
+
+  document.getElementById("newCommentPanel").style.display = "none";
+  document.getElementById("teacher_container").style.display = "flex";
+};
+
+cancelComment = () => {
+  document.getElementById("newCommentPanel").style.display = "none";
+  document.getElementById("teacher_container").style.display = "flex";
+};
+
+newComment = () => {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+
+  Toast.fire({
+    icon: "error",
+    title: "برای نظر دادن باید وارد حساب کاربری خود شوید.",
+  });
+};
+
 getProfData = (id) => {
-  // TODO connect to backend
-  console.log(id);
+  fetchProfInfo(id);
+  fetchRatings(id);
 
   document.getElementById("portfolio").style.display = "none";
   document.getElementById("teacher_container").style.display = "flex";
   document.getElementById("welcomePage").style.display = "none";
 };
-
-
-addComment = () => {
-    // TODO send request
-
-    document.getElementById("newCommentPanel").style.display="none"
-    document.getElementById("teacher_container").style.display="flex"
-
-}
-
-
-cancelComment = () => {
-    document.getElementById("newCommentPanel").style.display="none"
-    document.getElementById("teacher_container").style.display="flex"
-
-}
-
-
-newComment = () => {
-    
-    const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener("mouseenter", Swal.stopTimer);
-          toast.addEventListener("mouseleave", Swal.resumeTimer);
-        },
-      });
-    
-    if(window.localStorage.getItem('token')===null){
-        Toast.fire({
-            icon: "error",
-            title: "برای نظر دادن باید وارد حساب کاربری خود شوید.",
-          });
-          return;
-    }
-    document.getElementById("newCommentPanel").style.display="block"
-    document.getElementById("teacher_container").style.display="none"
-}
