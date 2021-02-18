@@ -53,3 +53,5 @@ CREATE TABLE ratings (
     primary key (prof_id),
     foreign key (prof_id) references profs (id) on delete cascade
 );
+
+CREATE INDEX ON profs (id);
