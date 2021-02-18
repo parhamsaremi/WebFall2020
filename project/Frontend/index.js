@@ -243,7 +243,7 @@ fetchComments = (profId) => {
   let xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status === 200) {
-      showComments(xhttp.response.comments);
+      showComments(xhttp.response.comments, profId);
     }
   };
   xhttp.open("GET", "http://localhost:3000/api/profs/comments/" + profId);
@@ -251,14 +251,14 @@ fetchComments = (profId) => {
   xhttp.send();
 };
 
-showComments = (comments) => {
+showComments = (comments, profId) => {
   let commentsDiv = document.getElementById("comments");
 
   commentsDiv.innerHTML = `<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" 
     rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
      crossorigin="anonymous">`;
   commentsDiv.innerHTML += `<div class="form-group justify-content-center">
-     <button class="btn btn-success" style="margin-left: 40%;" onclick="newComment()">کامنت جدید</button>
+     <button class="btn btn-success" style="margin-left: 40%;" onclick="newComment(${profId})">کامنت جدید</button>
    </div>`;
   if (comments === "") {
     return;
@@ -348,7 +348,21 @@ showProf = (info) => {
 };
 
 addComment = () => {
-  // TODO send request
+  let feature1 = document.getElementById("feature1").value
+  let feature2 = document.getElementById("feature2").value
+  let feature3 = document.getElementById("feature3").value
+  let feature4 = document.getElementById("feature4").value
+  let comment = document.getElementById("textComment").value
+
+  let profId = window.localStorage.getItem("profId");
+
+  let xhttp = new XMLHttpRequest();
+  xhttp.open("POST", "http://localhost:3000/api/feedback/" + profId); // <----
+  xhttp.setRequestHeader("Content-type", "application/json");
+  let token = window.localStorage.getItem("token");
+  xhttp.setRequestHeader("authorization", token);
+  xhttp.responseType = "json";
+  xhttp.send(JSON.stringify({ feature1, feature2, feature3, feature4, comment }));
 
   document.getElementById("newCommentPanel").style.display = "none";
   document.getElementById("teacher_container").style.display = "flex";
@@ -357,9 +371,10 @@ addComment = () => {
 cancelComment = () => {
   document.getElementById("newCommentPanel").style.display = "none";
   document.getElementById("teacher_container").style.display = "flex";
+  window.localStorage.removeItem("profId");
 };
 
-newComment = () => {
+newComment = (profId) => {
   const Toast = Swal.mixin({
     toast: true,
     position: "top-end",
@@ -372,13 +387,14 @@ newComment = () => {
     },
   });
 
-  if(window.localStorage.getItem('token')===null){
+  if (window.localStorage.getItem('token') === null) {
     Toast.fire({
-        icon: "error",
-        title: "برای نظر دادن باید وارد حساب کاربری خود شوید.",
-      });
+      icon: "error",
+      title: "برای نظر دادن باید وارد حساب کاربری خود شوید.",
+    });
   }
-  else{
+  else {
+    window.localStorage.setItem('profId', profId);
     document.getElementById("newCommentPanel").style.display = "block";
     document.getElementById("teacher_container").style.display = "none";
   }
