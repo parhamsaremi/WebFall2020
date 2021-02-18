@@ -208,15 +208,16 @@ signup = () => {
 }
 
 fetchComments = (profId) => {
+    showComments("")
     let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status === 200) {
-            showComments(xhttp.response.comments)
-        }
-    };
-    xhttp.open("GET", "http://localhost:3000/api/profs/comments/" + profId);
-    xhttp.responseType = 'json';
-    xhttp.send();
+    // xhttp.onreadystatechange = function () {
+    //     if (this.readyState == 4 && this.status === 200) {
+    //         showComments(xhttp.response.comments)
+    //     }
+    // };
+    // xhttp.open("GET", "http://localhost:3000/api/profs/comments/" + profId);
+    // xhttp.responseType = 'json';
+    // xhttp.send();
 }
 
 showComments = (comments) => {
@@ -225,7 +226,12 @@ showComments = (comments) => {
     commentsDiv.innerHTML = `<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" 
     rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
      crossorigin="anonymous">`;
-
+     commentsDiv.innerHTML += `<div class="form-group justify-content-center">
+     <button class="btn btn-success" style="margin-left: 40%;" onclick="newComment()">کامنت جدید</button>
+   </div>`
+   if(comments === ""){
+       return
+   }
     for (let item of comments) {
         commentsDiv.innerHTML += `<div class="container"><div class="row"><div class="col">
         <div class="media g-mb-30 media-comment">
@@ -252,7 +258,7 @@ fetchRatings = (profId) => {
 showCharts = (ratings) => {
     let chart = new CanvasJS.Chart("charts", {
         animationEnabled: true,
-        theme: "dark2", // "light1", "light2", "dark1", "dark2"
+        theme: "light2", // "light1", "light2", "dark1", "dark2"
         title: {
             text: "Teacher scores"
         },
@@ -266,8 +272,8 @@ showCharts = (ratings) => {
             legendText: "Scores are ranged from 0 to 5",
             dataPoints: [
                 { y: ratings['feature_1'], label: "اخلاق" },
-                { y: ratings['feature_2'], label: "نمره" },
-                { y: ratings['feature_3'], label: "درس" },
+                { y: ratings['feature_2'], label: "نمره دادن" },
+                { y: ratings['feature_3'], label: "کیفیت تدریس" },
                 { y: ratings['feature_4'], label: "نظم" }
             ]
         }]
@@ -298,4 +304,28 @@ showProf = (info) => {
     <h6>${info.uni}</h6>`
 
     infoDiv.innerHTML = template
+}
+
+newComment = () =>{
+    // TODO check if logged in
+
+    document.getElementById("newCommentPanel").style.display="block"
+    document.getElementById("teacher_container").style.display="none"
+}
+
+
+
+addComment = () => {
+    // TODO send request
+
+    document.getElementById("newCommentPanel").style.display="none"
+    document.getElementById("teacher_container").style.display="flex"
+
+}
+
+
+cancelComment = () => {
+    document.getElementById("newCommentPanel").style.display="none"
+    document.getElementById("teacher_container").style.display="flex"
+
 }
